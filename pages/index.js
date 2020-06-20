@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 // import dbConnect from "../utils/dbConnect";
 // import Article from "../models/article";
 import useWitdh from "../hooks/useWidth";
+import { getArticles } from "./api/articles/index";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -160,7 +161,7 @@ export default function Home({ articles }) {
             </div>
             {/* <h2 className={classes.copy}>A New Type of Journalism</h2> */}
           </div>
-          <Card article={articles[articles.length - 1]} />
+          {/* <Card article={articles[articles.length - 1]} /> */}
           <div className={classes.smallCardWrapper}>
             {articles.map((article) => {
               return <SmallCard article={article} />;
@@ -176,14 +177,19 @@ export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
 
-  const res = await fetch(`https://tothecore.now.sh/api/articles`);
-  const result = await res.json();
+  const result = await getArticles();
+  const articles = result.map((article) => {
+    article = article.toObject();
+    article._id = article._id.toString();
+    article.created_at = article.created_at.toString();
+    article.created_at = article.updated_at.toString();
+  });
 
   // By returning { props: posts }, the Blog component
   // will receive `posts` as a prop at build time
   return {
     props: {
-      articles: result.data,
+      articles: articles,
     },
   };
 }

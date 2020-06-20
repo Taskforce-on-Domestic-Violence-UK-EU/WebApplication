@@ -1,5 +1,12 @@
 import dbConnect from "../../../utils/dbConnect";
 import Article from "../../../models/article";
+import { getArticle } from "./[id]";
+
+export const getArticles = async () => {
+  const articles = await Article.find({});
+  console.log(articles);
+  return articles;
+};
 
 export default async (req, res) => {
   const {
@@ -38,7 +45,7 @@ export default async (req, res) => {
 
     case "GET":
       try {
-        const articles = await Article.find({});
+        const articles = await getArticles();
         res.status(200).json({ status: "success", data: articles });
       } catch (error) {
         res.status(400).json({ status: "error", message: error.message });

@@ -4,6 +4,7 @@ import Article from "../components/Article";
 import MobileArticle from "../components/MobileArticle";
 import useWitdh from "../hooks/useWidth";
 import { useEffect } from "react";
+import { getArticle } from "./api/articles/[id]";
 
 export default function Page({ article }) {
   const { width, setWidth } = useWitdh();
@@ -39,9 +40,7 @@ export default function Page({ article }) {
           </title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Layout>
-          <Article article={article} />
-        </Layout>
+        <Layout>{/* <Article article={article} /> */}</Layout>
       </div>
     );
   }
@@ -49,23 +48,20 @@ export default function Page({ article }) {
 
 // TODO : Switch to Static ?
 
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
 
-  const res = await fetch(
-    `http://localhost:3000/api/articles/5eebf473b773520418a2bfc8`
-  );
-  const result = await res.json();
+//   const article = await getArticle("5eebf473b773520418a2bfc8");
 
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      article: result.data,
-    },
-  };
-}
+//   // By returning { props: posts }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       article: article,
+//     },
+//   };
+// }
 
 // export async function getServerSideProps() {
 //   // Fetch data from external API

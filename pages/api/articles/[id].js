@@ -1,6 +1,11 @@
 import dbConnect from "../../../utils/dbConnect";
 import Article from "../../../models/article";
 
+export const getArticle = async (id) => {
+  const article = await Article.findById(id);
+  return article;
+};
+
 export default async (req, res) => {
   const {
     query: { id },
@@ -42,7 +47,7 @@ export default async (req, res) => {
 
     case "GET":
       try {
-        const article = await Article.findById(id);
+        const article = await getArticle(id);
         res.status(200).json({ status: "success", data: article });
       } catch (error) {
         res.status(400).json({ status: "error", message: error.message });
