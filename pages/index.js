@@ -6,7 +6,7 @@ import Chip from "@material-ui/core/Chip";
 import MobileCard from "../components/MobileCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-// import dbConnect from "../utils/dbConnect";
+import dbConnect from "../utils/dbConnect";
 // import Article from "../models/article";
 import useWitdh from "../hooks/useWidth";
 import { getArticles } from "./api/articles/index";
@@ -161,7 +161,7 @@ export default function Home({ articles }) {
             </div>
             {/* <h2 className={classes.copy}>A New Type of Journalism</h2> */}
           </div>
-          {/* <Card article={articles[articles.length - 1]} /> */}
+          <Card article={articles[articles.length - 1]} />
           <div className={classes.smallCardWrapper}>
             {articles.map((article) => {
               return <SmallCard article={article} />;
@@ -174,36 +174,13 @@ export default function Home({ articles }) {
 }
 
 export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-
   const result = await getArticles();
-  const articles = result.map((article) => {
-    article = article.toObject();
-    article._id = article._id.toString();
-    article.created_at = article.created_at.toString();
-    article.created_at = article.updated_at.toString();
-  });
+  const json_string = JSON.stringify(result);
+  const articles = JSON.parse(json_string);
 
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
   return {
     props: {
       articles: articles,
     },
   };
 }
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`http://localhost:3000/api/articles`);
-//   const result = await res.json();
-
-//   // By returning { props: posts }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return {
-//     props: {
-//       articles: result.data,
-//     },
-//   };
-// }

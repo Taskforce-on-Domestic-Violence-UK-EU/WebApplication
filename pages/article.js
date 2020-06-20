@@ -40,7 +40,9 @@ export default function Page({ article }) {
           </title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Layout>{/* <Article article={article} /> */}</Layout>
+        <Layout>
+          <Article article={article} />
+        </Layout>
       </div>
     );
   }
@@ -48,20 +50,22 @@ export default function Page({ article }) {
 
 // TODO : Switch to Static ?
 
-// export async function getStaticProps() {
-//   // Call an external API endpoint to get posts.
-//   // You can use any data fetching library
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
 
-//   const article = await getArticle("5eebf473b773520418a2bfc8");
+  const result = await getArticle("5eebf473b773520418a2bfc8");
+  const json_string = JSON.stringify(result);
+  const article = JSON.parse(json_string);
 
-//   // By returning { props: posts }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return {
-//     props: {
-//       article: article,
-//     },
-//   };
-// }
+  // By returning { props: posts }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      article: article,
+    },
+  };
+}
 
 // export async function getServerSideProps() {
 //   // Fetch data from external API
