@@ -7,7 +7,6 @@ import MobileCard from "../components/MobileCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import dbConnect from "../utils/dbConnect";
-// import Article from "../models/article";
 import useWitdh from "../hooks/useWidth";
 import { getArticles } from "./api/articles/index";
 
@@ -164,7 +163,7 @@ export default function Home({ articles }) {
           <Card article={articles[articles.length - 1]} />
           <div className={classes.smallCardWrapper}>
             {articles.map((article) => {
-              return <SmallCard article={article} />;
+              return <SmallCard key={article._id} article={article} />;
             })}
           </div>
         </Layout>
@@ -174,6 +173,8 @@ export default function Home({ articles }) {
 }
 
 export async function getStaticProps() {
+  await dbConnect();
+
   const result = await getArticles();
   const json_string = JSON.stringify(result);
   const articles = JSON.parse(json_string);

@@ -130,7 +130,7 @@ function Article({ article }) {
       <div className={classes.article}>
         <div className={classes.innerWrapper}>
           <h2 className={classes.author}>{article.author}</h2>
-          <h2 className={classes.date}>{article.data}</h2>
+          <h2 className={classes.date}>{article.date}</h2>
         </div>
 
         <div className={classes.body}>

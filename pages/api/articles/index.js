@@ -4,7 +4,6 @@ import { getArticle } from "./[id]";
 
 export const getArticles = async () => {
   const articles = await Article.find({});
-  console.log(articles);
   return articles;
 };
 

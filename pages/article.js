@@ -5,6 +5,7 @@ import MobileArticle from "../components/MobileArticle";
 import useWitdh from "../hooks/useWidth";
 import { useEffect } from "react";
 import { getArticle } from "./api/articles/[id]";
+import dbConnect from "../utils/dbConnect";
 
 export default function Page({ article }) {
   const { width, setWidth } = useWitdh();
@@ -53,6 +54,8 @@ export default function Page({ article }) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
+
+  await dbConnect();
 
   const result = await getArticle("5eebf473b773520418a2bfc8");
   const json_string = JSON.stringify(result);
