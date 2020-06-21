@@ -1,7 +1,7 @@
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import KeyPoint from "./Key";
-
+import Chip from "@material-ui/core/Chip";
 import { useRef, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -114,6 +114,27 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 30,
     marginBottom: 30,
   },
+  chip: {
+    marginRight: 15,
+    paddingLeft: 5,
+    paddingRight: 5,
+    fontFamily: "Frank Ruhl Libre, serif",
+    fontWeight: 700,
+    fontSize: 13,
+    backgroundColor: "#E5E5E5",
+    "&:hover": {
+      opacity: 0.5,
+      cursor: "pointer",
+    },
+  },
+  chipArray: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%",
+    maxWidth: "100%",
+    marginBottom: 30,
+    marginTop: 7.5,
+  },
 }));
 
 function Article({ article }) {
@@ -128,6 +149,19 @@ function Article({ article }) {
         </h1>
       </div>
       <div className={classes.article}>
+        <div className={classes.chipArray}>
+          {article.tags.map((tag) => {
+            return (
+              <Chip
+                size="small"
+                color="primary"
+                label={tag}
+                className={classes.chip}
+                key={tag}
+              />
+            );
+          })}
+        </div>
         <div className={classes.innerWrapper}>
           <h2 className={classes.author}>{article.author}</h2>
           <h2 className={classes.date}>{article.date}</h2>

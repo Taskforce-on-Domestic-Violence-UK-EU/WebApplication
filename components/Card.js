@@ -140,12 +140,17 @@ function Preview({ article }) {
           <h1 className={classes.title}>{article.title}</h1>
           <p className={classes.description}>{article.description}</p>
           <div className={classes.chipArray}>
-            <Chip
-              color="primary"
-              label={"Social Policy"}
-              className={classes.chip}
-            />
-            <Chip label={"Law"} className={classes.chip} />
+            {article.tags.map((tag) => {
+              return (
+                <Chip
+                  size="small"
+                  color="primary"
+                  label={tag}
+                  className={classes.chip}
+                  key={tag}
+                />
+              );
+            })}
           </div>
         </div>
         <div className={classes.imageContainer}>

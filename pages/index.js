@@ -72,13 +72,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home({ articles }) {
+export default function Home({ data }) {
   // const [articles, setArticles] = useState([]);
   const classes = useStyles();
+  const [feature, setFeature] = useState({});
+  const [articles, setArticles] = useState([]);
   const { width, setWidth } = useWitdh();
+
+  const organizeArticles = async (articles) => {
+    const list = [];
+
+    await articles.forEach((article) => {
+      if (article.feature) {
+        setFeature(article);
+      } else {
+        list.push(article);
+      }
+    });
+    setArticles(list);
+  };
 
   useEffect(() => {
     setWidth(window.innerWidth);
+    organizeArticles(data);
   }, []);
 
   if (width == 0) {
@@ -160,7 +176,7 @@ export default function Home({ articles }) {
             </div>
             {/* <h2 className={classes.copy}>A New Type of Journalism</h2> */}
           </div>
-          <Card article={articles[articles.length - 1]} />
+          <Card article={feature} />
           <div className={classes.smallCardWrapper}>
             {articles.map((article) => {
               return <SmallCard key={article._id} article={article} />;
@@ -181,7 +197,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      articles: articles,
+      data: articles,
     },
   };
 }

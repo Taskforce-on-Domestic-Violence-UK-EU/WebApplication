@@ -7,7 +7,8 @@ import Link from "next/link";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
-import useWitdh from "../hooks/useWidth";
+import useWidth from "../hooks/useWidth";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     display: "flex",
-
+    minWidth: 200,
     alignItems: "center",
     margin: 0,
     padding: 0,
@@ -55,11 +56,14 @@ const useStyles = makeStyles((theme) => ({
   content: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 300,
+    justifyContent: "space-between",
+    width: "100%",
     margin: 0,
-    height: "100%",
-    padding: 25,
+    minHeight: "100%",
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingTop: 25,
+    paddingBottom: 20,
   },
 
   title: {
@@ -119,16 +123,26 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     width: "100%",
     maxWidth: "100%",
-    marginTop: 20,
+    margin: 0,
   },
   button: {
     marginTop: 25,
+  },
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
 function Preview({ article }) {
   const classes = useStyles();
-  const { width, setWidth } = useWitdh();
+  const { width, setWidth } = useWidth();
+  const [tags, setTags] = useState([]);
+
+  const organizeTags = () => {
+    const i = width < 1225 ? 1 : 2;
+    setTags(article.tags.slice(0, i));
+  };
 
   useEffect(() => {
     setWidth(window.innerWidth);
@@ -136,6 +150,7 @@ function Preview({ article }) {
 
   useEffect(() => {
     console.log(width);
+    organizeTags();
   }, [width]);
 
   if (article) {
@@ -144,16 +159,18 @@ function Preview({ article }) {
         <Card className={classes.card}>
           {/* <CardContent className={classes.innerWrapper}> */}
           <div className={classes.content}>
-            <div className={classes.details}>
-              <h2 className={classes.author}>{article.author}</h2>
-              <h2 className={classes.date}>{article.date}</h2>
+            <div className={classes.wrapper}>
+              <div className={classes.details}>
+                <h2 className={classes.author}>{article.author}</h2>
+                <h2 className={classes.date}>{article.date}</h2>
+              </div>
+              <h1
+                style={{ fontSize: width < 1200 ? 15 : 17 }}
+                className={classes.title}
+              >
+                {article.title}
+              </h1>
             </div>
-            <h1
-              style={{ fontSize: width < 1200 ? 15 : 17 }}
-              className={classes.title}
-            >
-              {article.title}
-            </h1>
             {/* <p className={classes.description}>
             The term ‘domestic abuse’ is tightly wrapped in a layer of
             misconceptions and misunderstandings: widespread inaccurate beliefs
@@ -163,7 +180,7 @@ function Preview({ article }) {
           </p> */}
 
             <div className={classes.chipArray}>
-              {article.tags.map((tag) => {
+              {tags.map((tag) => {
                 return (
                   <Chip
                     size="small"
