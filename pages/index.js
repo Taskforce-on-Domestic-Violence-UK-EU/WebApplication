@@ -140,19 +140,25 @@ export default function Home({ data }) {
               <Chip
                 size="small"
                 color="primary"
-                label={"Social Policy"}
+                label={"Criminal Law"}
                 className={classes.chip}
               />
               <Chip
                 size="small"
                 color="primary"
-                label={"Law"}
+                label={"Social Justice"}
                 className={classes.chip}
               />
               <Chip
                 size="small"
                 color="primary"
-                label={"British Imperialism"}
+                label={"Immigration Law"}
+                className={classes.chip}
+              />
+              <Chip
+                size="small"
+                color="primary"
+                label={"Human Rights"}
                 className={classes.chip}
               />
               <Chip
@@ -164,13 +170,7 @@ export default function Home({ data }) {
               <Chip
                 size="small"
                 color="primary"
-                label={"Economy"}
-                className={classes.chip}
-              />
-              <Chip
-                size="small"
-                color="primary"
-                label={"Finance"}
+                label={"Lockdown"}
                 className={classes.chip}
               />
             </div>

@@ -43,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
 
   imageContainer: {
     display: "flex",
-    width: "40%",
+    width: "100%",
     alignItems: "center",
-    marginBottom: "4vh",
+    marginBottom: "1vh",
   },
   image: {
     width: "100%",
-    height: 600,
+    height: "auto",
     objectFit: "cover",
   },
   article: {
@@ -178,6 +178,17 @@ function Article({ article }) {
 
               case "point":
                 return <KeyPoint size={25} text={item.content} />;
+
+              case "image":
+                return (
+                  <div className={classes.imageContainer}>
+                    <img
+                      className={classes.image}
+                      src={item.content}
+                      alt="image"
+                    />
+                  </div>
+                );
 
               default:
                 return null;

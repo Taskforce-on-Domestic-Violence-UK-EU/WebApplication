@@ -23,10 +23,10 @@ export default async (req, res) => {
             { _id: id },
             {
               content: body.content,
-              title: body.title,
-              image: body.image,
-              description: body.description,
-              tags: body.tags,
+              // title: body.title,
+              // image: body.image,
+              // description: body.description,
+              // tags: body.tags,
             },
             {
               new: true,
