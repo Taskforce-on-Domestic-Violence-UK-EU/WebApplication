@@ -145,8 +145,13 @@ function Article({ article }) {
   const classes = useStyles();
   const [content, setContent] = useState([]);
   const [reload, setReloads] = useState(0);
+  const [length, setLength] = useState(0);
 
   // TODO : FIX RERENDER GARBAGE
+
+  const onChange = (c) => {
+    setContent(c);
+  };
 
   useEffect(() => {
     setContent(article.content);
@@ -154,7 +159,7 @@ function Article({ article }) {
 
   useEffect(() => {
     console.log(content);
-  }, [reload]);
+  }, [content]);
 
   const reRender = () => {
     setReloads((r) => r + 1);
@@ -195,6 +200,7 @@ function Article({ article }) {
                     key={i}
                     reRender={reRender}
                     content={content}
+                    onChange={onChange}
                     setContent={setContent}
                     item={item}
                   />

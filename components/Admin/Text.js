@@ -6,6 +6,7 @@ import { IconButton } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Modal from "./Modal";
+import CreateModal from "./CreateModal";
 
 import { useState } from "react";
 
@@ -36,65 +37,74 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Text({ reRender, item, content, setContent }) {
+function Text({ item, content, setContent }) {
   const classes = useStyles();
   const [edit, setEdit] = useState(false);
-  const [display, setDisplay] = useState(true);
+  const [create, setCreate] = useState(false);
 
   const getIndex = () => content.indexOf(item);
 
   const update = (value) => {
-    let copy = content;
     let index = getIndex();
-    copy[index].content = value;
-    setContent(copy);
+    let item = content[index];
+    item.content = value;
+    setContent((content) => [
+      ...content.slice(0, index),
+      item,
+      ...content.slice(index + 1),
+    ]);
   };
 
-  const create = () => {
-    let copy = content;
-    let index = getIndex();
-    let item = { type: "text", content: "new text paragraph" };
-    copy.splice(index + 1, 0, item);
-    reRender();
-    setContent(copy);
+  const createItem = (item) => {
+    const index = getIndex();
+    setContent((content) => [
+      ...content.slice(0, index + 1),
+      item,
+      ...content.slice(index + 1),
+    ]);
   };
-
   const remove = () => {
-    let copy = content;
-    let index = getIndex();
-    copy.splice(index, 1);
-    setContent(copy);
-    setDisplay(false);
+    setContent((content) => content.filter((i) => i !== item));
   };
 
-  if (display) {
-    return (
-      <div className={classes.wrapper}>
-        <div className={classes.container}>
-          <Modal
-            remove={remove}
-            update={update}
-            item={item}
-            open={edit}
-            setOpen={setEdit}
-          />
-          <p className={classes.text}>{item.content}</p>
-          <div className={classes.buttonContainer}>
-            <IconButton onClick={() => setEdit(true)}>
-              <MoreVertIcon />
-            </IconButton>
-          </div>
-        </div>
+  return (
+    <div className={classes.wrapper}>
+      {getIndex() === 0 ? (
         <div className={classes.buttonContainer}>
-          <IconButton onClick={() => create()}>
+          <IconButton onClick={() => setCreate(true)}>
             <AddCircleIcon />
           </IconButton>
         </div>
+      ) : null}
+
+      <div className={classes.container}>
+        <Modal
+          remove={remove}
+          update={update}
+          item={item}
+          open={edit}
+          setOpen={setEdit}
+        />
+        <CreateModal
+          createItem={createItem}
+          item={item}
+          open={create}
+          setOpen={setCreate}
+        />
+        <p className={classes.text}>{item.content}</p>
+        <div className={classes.buttonContainer}>
+          <IconButton onClick={() => setEdit(true)}>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
       </div>
-    );
-  } else {
-    return null;
-  }
+      <div className={classes.buttonContainer}>
+        <IconButton onClick={() => setCreate(true)}>
+          <AddCircleIcon />
+        </IconButton>
+      </div>
+    </div>
+  );
 }
 
 export default Text;
