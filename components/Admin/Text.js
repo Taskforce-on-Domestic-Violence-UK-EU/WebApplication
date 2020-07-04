@@ -1,7 +1,4 @@
-import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import Chip from "@material-ui/core/Chip";
-import { useRef, useEffect } from "react";
 import { IconButton } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -44,29 +41,6 @@ function Text({ item, content, setContent }) {
 
   const getIndex = () => content.indexOf(item);
 
-  const update = (value) => {
-    let index = getIndex();
-    let item = content[index];
-    item.content = value;
-    setContent((content) => [
-      ...content.slice(0, index),
-      item,
-      ...content.slice(index + 1),
-    ]);
-  };
-
-  const createItem = (item) => {
-    const index = getIndex();
-    setContent((content) => [
-      ...content.slice(0, index + 1),
-      item,
-      ...content.slice(index + 1),
-    ]);
-  };
-  const remove = () => {
-    setContent((content) => content.filter((i) => i !== item));
-  };
-
   return (
     <div className={classes.wrapper}>
       {getIndex() === 0 ? (
@@ -79,14 +53,14 @@ function Text({ item, content, setContent }) {
 
       <div className={classes.container}>
         <Modal
-          remove={remove}
-          update={update}
+          setContent={setContent}
           item={item}
           open={edit}
           setOpen={setEdit}
         />
         <CreateModal
-          createItem={createItem}
+          setContent={setContent}
+          content={content}
           item={item}
           open={create}
           setOpen={setCreate}

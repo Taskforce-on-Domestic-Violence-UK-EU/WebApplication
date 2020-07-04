@@ -42,28 +42,6 @@ function Header({ item, content, setContent }) {
 
   const getIndex = () => content.indexOf(item);
 
-  const update = (value) => {
-    let index = getIndex();
-    let item = content[index];
-    item.content = value;
-    setContent((content) => [
-      ...content.slice(0, index),
-      item,
-      ...content.slice(index + 1),
-    ]);
-  };
-
-  const createItem = (item) => {
-    const index = getIndex();
-    setContent((content) => [
-      ...content.slice(0, index + 1),
-      item,
-      ...content.slice(index + 1),
-    ]);
-  };
-  const remove = () => {
-    setContent((content) => content.filter((i) => i !== item));
-  };
   return (
     <div className={classes.wrapper}>
       {getIndex() === 0 ? (
@@ -75,14 +53,14 @@ function Header({ item, content, setContent }) {
       ) : null}
       <div className={classes.container}>
         <Modal
-          remove={remove}
-          update={update}
+          setContent={setContent}
           item={item}
           open={edit}
           setOpen={setEdit}
         />
         <CreateModal
-          createItem={createItem}
+          setContent={setContent}
+          content={content}
           item={item}
           open={create}
           setOpen={setCreate}

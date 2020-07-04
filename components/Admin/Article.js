@@ -144,14 +144,10 @@ const useStyles = makeStyles((theme) => ({
 function Article({ article }) {
   const classes = useStyles();
   const [content, setContent] = useState([]);
-  const [reload, setReloads] = useState(0);
-  const [length, setLength] = useState(0);
 
-  // TODO : FIX RERENDER GARBAGE
-
-  const onChange = (c) => {
-    setContent(c);
-  };
+  // const handleChange = (c) => {
+  //   setContent(c);
+  // };
 
   useEffect(() => {
     setContent(article.content);
@@ -160,10 +156,6 @@ function Article({ article }) {
   useEffect(() => {
     console.log(content);
   }, [content]);
-
-  const reRender = () => {
-    setReloads((r) => r + 1);
-  };
 
   return (
     <div className={classes.container}>
@@ -198,9 +190,7 @@ function Article({ article }) {
                 return (
                   <Text
                     key={i}
-                    reRender={reRender}
                     content={content}
-                    onChange={onChange}
                     setContent={setContent}
                     item={item}
                   />
@@ -210,7 +200,6 @@ function Article({ article }) {
                 return (
                   <Header
                     key={i}
-                    reRender={reRender}
                     content={content}
                     setContent={setContent}
                     item={item}

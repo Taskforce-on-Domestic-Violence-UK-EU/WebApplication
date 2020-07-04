@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: 75,
+    height: 200,
     margin: 0,
     padding: 0,
   },
@@ -30,9 +30,12 @@ const useStyles = makeStyles((theme) => ({
   },
   dialogActions: {
     zIndex: 2,
-    justifyContent: "space-between",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
     width: "100%",
-    height: 50,
+    height: 65,
+
     backgroundColor: "white",
     margin: 0,
     padding: 0,
@@ -87,23 +90,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Modal = ({ createItem, item, open, setOpen }) => {
+const Modal = ({ content, setContent, item, open, setOpen }) => {
   const classes = useStyles();
 
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    setContent(item.content);
-  }, [item]);
-
-  // TODO : each modal is referencing its data prop, is it making m copies if there are m modals?
+  const getIndex = () => content.indexOf(item);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handelChange = (e) => {
-    setContent(e.target.value);
+  const createItem = (item) => {
+    const index = getIndex();
+    setContent((content) => [
+      ...content.slice(0, index + 1),
+      item,
+      ...content.slice(index + 1),
+    ]);
   };
 
   const handleCreate = (type) => {

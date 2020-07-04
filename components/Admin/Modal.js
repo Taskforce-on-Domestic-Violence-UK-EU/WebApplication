@@ -3,9 +3,9 @@ import { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-import { IconButton, Button } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
 
@@ -86,23 +86,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Modal = ({ remove, update, item, open, setOpen }) => {
+const Modal = ({ item, open, setOpen, setContent }) => {
   const classes = useStyles();
-
-  const [content, setContent] = useState("");
+  const [value, setValue] = useState("");
 
   useEffect(() => {
-    setContent(item.content);
+    setValue(item.content);
   }, [item]);
-
-  // TODO : each modal is referencing its data prop, is it making m copies if there are m modals?
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handelChange = (e) => {
+  const onChange = (e) => {
     setContent(e.target.value);
+  };
+
+  const getIndex = () => content.indexOf(item);
+
+  const update = (value) => {
+    let index = getIndex();
+    let item = content[index];
+    item.content = value;
+    setContent((content) => [
+      ...content.slice(0, index),
+      item,
+      ...content.slice(index + 1),
+    ]);
+  };
+
+  const remove = () => {
+    setContent((content) => content.filter((i) => i !== item));
   };
 
   return (
@@ -115,10 +129,14 @@ const Modal = ({ remove, update, item, open, setOpen }) => {
       onClose={handleClose}
     >
       <DialogActions className={classes.dialogActions}>
-        <IconButton className={classes.close} onClick={handleClose}>
-          <CloseIcon />
+        <IconButton
+          onClick={async () => {
+            await remove();
+            handleClose();
+          }}
+        >
+          <DeleteForeverIcon />
         </IconButton>
-
         <IconButton
           className={classes.close}
           onClick={async () => {
@@ -128,13 +146,8 @@ const Modal = ({ remove, update, item, open, setOpen }) => {
         >
           <EditIcon />
         </IconButton>
-        <IconButton
-          onClick={async () => {
-            await remove();
-            handleClose();
-          }}
-        >
-          <HighlightOffIcon />
+        <IconButton className={classes.close} onClick={handleClose}>
+          <CloseIcon />
         </IconButton>
       </DialogActions>
       <div className={classes.body}>
@@ -143,8 +156,8 @@ const Modal = ({ remove, update, item, open, setOpen }) => {
             className={classes.textField}
             id="standard-helperText"
             multiline
-            value={content}
-            onChange={(e) => handelChange(e)}
+            value={value}
+            onChange={(e) => onChange(e)}
           />
         ) : null}
 
@@ -153,7 +166,7 @@ const Modal = ({ remove, update, item, open, setOpen }) => {
             className={classes.textField}
             id="standard-helperText"
             multiline
-            value={content}
+            value={value}
             onChange={(e) => handelChange(e)}
           />
         ) : null}
