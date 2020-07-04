@@ -2,7 +2,9 @@ import { useState, createContext } from "react";
 
 export const AdminContext = createContext(null);
 
-export const AdminStore = ({ children }) => {
+export const AdminStore = ({ children, article }) => {
+  const [content, setContent] = useState([]);
+
   const getIndex = (item) => content.indexOf(item);
 
   const createItem = (item) => {
@@ -29,5 +31,19 @@ export const AdminStore = ({ children }) => {
     setContent((content) => content.filter((i) => i !== item));
   };
 
-  return <AdminContext.Provider value={{}}>{children}</AdminContext.Provider>;
+  return (
+    <AdminContext.Provider
+      value={{
+        article,
+        content,
+        setContent,
+        getIndex,
+        createItem,
+        update,
+        remove,
+      }}
+    >
+      {children}
+    </AdminContext.Provider>
+  );
 };

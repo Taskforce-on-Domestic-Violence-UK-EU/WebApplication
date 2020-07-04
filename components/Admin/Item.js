@@ -1,13 +1,15 @@
-import Container from "@material-ui/core/Container";
+import { useState, useContext } from "react";
+// Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import Chip from "@material-ui/core/Chip";
-import { useRef, useEffect } from "react";
 import { IconButton } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Modal from "./Modal";
+// Components
+import Value from "./Value";
+import EditModal from "./EditModal";
 import CreateModal from "./CreateModal";
-import { useState } from "react";
+// Contexts
+import { AdminContext } from "./contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -23,8 +25,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     width: "100%",
   },
-
-  subheader: {
+  text: {
+    textDecoration: "none",
+    color: "black",
+    fontFamily: "Frank Ruhl Libre, serif",
+    fontWeight: 300,
+    fontSize: 22,
+    height: "100%",
+    lineHeight: "32px",
+  },
+  header: {
     textDecoration: "none",
     color: "black",
     fontFamily: "Frank Ruhl Libre, serif",
@@ -33,14 +43,24 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     lineHeight: "32px",
   },
+  imageContainer: {
+    display: "flex",
+    width: "100%",
+    alignItems: "center",
+    marginBottom: "1vh",
+  },
+  image: {
+    width: "100%",
+    height: "auto",
+    objectFit: "cover",
+  },
 }));
 
-function Header({ item, content, setContent }) {
+function Item({ item }) {
   const classes = useStyles();
-  const [edit, setEdit] = useState(false);
-  const [create, setCreate] = useState(false);
-
-  const getIndex = () => content.indexOf(item);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
+  const { getIndex } = useContext(AdminContext);
 
   return (
     <div className={classes.wrapper}>
@@ -52,32 +72,22 @@ function Header({ item, content, setContent }) {
         </div>
       ) : null}
       <div className={classes.container}>
-        <Modal
-          setContent={setContent}
-          item={item}
-          open={edit}
-          setOpen={setEdit}
-        />
-        <CreateModal
-          setContent={setContent}
-          content={content}
-          item={item}
-          open={create}
-          setOpen={setCreate}
-        />
-        <h3 className={classes.subheader}>{item.content}</h3>
+        <EditModal item={item} open={showEdit} setOpen={setShowEdit} />
+        <CreateModal item={item} open={showCreate} setOpen={setShowCreate} />
+        <Value item={item} />
         <div className={classes.buttonContainer}>
-          <IconButton onClick={() => setEdit(true)}>
+          <IconButton onClick={() => setShowEdit(true)}>
             <MoreVertIcon />
           </IconButton>
         </div>
       </div>
       <div className={classes.buttonContainer}>
-        <IconButton onClick={() => setCreate(true)}>
+        <IconButton onClick={() => setShowCreate(true)}>
           <AddCircleIcon />
         </IconButton>
       </div>
     </div>
   );
 }
-export default Header;
+
+export default Item;

@@ -8,6 +8,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
+// Contexts
+import { AdminContext } from "./contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -89,6 +91,9 @@ const useStyles = makeStyles((theme) => ({
 const Modal = ({ item, open, setOpen, setContent }) => {
   const classes = useStyles();
   const [value, setValue] = useState("");
+  const { update, remove } = useContext(AdminContext);
+
+  console.log(update);
 
   useEffect(() => {
     setValue(item.content);
@@ -102,23 +107,6 @@ const Modal = ({ item, open, setOpen, setContent }) => {
     setContent(e.target.value);
   };
 
-  const getIndex = () => content.indexOf(item);
-
-  const update = (value) => {
-    let index = getIndex();
-    let item = content[index];
-    item.content = value;
-    setContent((content) => [
-      ...content.slice(0, index),
-      item,
-      ...content.slice(index + 1),
-    ]);
-  };
-
-  const remove = () => {
-    setContent((content) => content.filter((i) => i !== item));
-  };
-
   return (
     <Dialog
       scroll="body"
@@ -130,8 +118,8 @@ const Modal = ({ item, open, setOpen, setContent }) => {
     >
       <DialogActions className={classes.dialogActions}>
         <IconButton
-          onClick={async () => {
-            await remove();
+          onClick={() => {
+            remove();
             handleClose();
           }}
         >
@@ -139,8 +127,8 @@ const Modal = ({ item, open, setOpen, setContent }) => {
         </IconButton>
         <IconButton
           className={classes.close}
-          onClick={async () => {
-            await update(content);
+          onClick={() => {
+            update(content);
             handleClose();
           }}
         >

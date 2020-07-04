@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
-import Article from "../../components/Admin/Article";
+import Main from "../../components/Admin/Core/Main";
 import MobileArticle from "../../components/MobileArticle";
 import useWitdh from "../../hooks/useWidth";
 import { useEffect } from "react";
@@ -42,7 +42,7 @@ export default function Page({ article }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
-          <Article article={article} />
+          <Main article={article} />
         </Layout>
       </div>
     );

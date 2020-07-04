@@ -2,11 +2,12 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // Components
-import Text from "./Text";
-import Header from "./Header";
+import Item from "./Item";
+// Contexts
+import { AdminContext } from "./contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -141,13 +142,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Article({ article }) {
+function Article() {
   const classes = useStyles();
   const [content, setContent] = useState([]);
-
-  // const handleChange = (c) => {
-  //   setContent(c);
-  // };
+  const { article } = useContext(AdminContext);
 
   useEffect(() => {
     setContent(article.content);
@@ -184,45 +182,7 @@ function Article({ article }) {
         <div className={classes.body}>
           {content.map((item) => {
             let i = content.indexOf(item);
-
-            switch (item.type) {
-              case "text":
-                return (
-                  <Text
-                    key={i}
-                    content={content}
-                    setContent={setContent}
-                    item={item}
-                  />
-                );
-
-              case "header":
-                return (
-                  <Header
-                    key={i}
-                    content={content}
-                    setContent={setContent}
-                    item={item}
-                  />
-                );
-
-              case "point":
-                return <KeyPoint key={i} size={25} text={item.content} />;
-
-              case "image":
-                return (
-                  <div key={i} className={classes.imageContainer}>
-                    <img
-                      className={classes.image}
-                      src={item.content}
-                      alt="image"
-                    />
-                  </div>
-                );
-
-              default:
-                return null;
-            }
+            return <Item key={i} item={item} />;
           })}
         </div>
       </div>

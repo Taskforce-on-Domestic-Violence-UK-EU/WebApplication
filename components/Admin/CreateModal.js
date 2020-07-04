@@ -5,6 +5,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import { IconButton, Button, ButtonGroup } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+// Contexts
+import { AdminContext } from "./contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -92,20 +94,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Modal = ({ content, setContent, item, open, setOpen }) => {
   const classes = useStyles();
-
-  const getIndex = () => content.indexOf(item);
+  const { createItem } = useContext(AdminContext);
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const createItem = (item) => {
-    const index = getIndex();
-    setContent((content) => [
-      ...content.slice(0, index + 1),
-      item,
-      ...content.slice(index + 1),
-    ]);
   };
 
   const handleCreate = (type) => {
