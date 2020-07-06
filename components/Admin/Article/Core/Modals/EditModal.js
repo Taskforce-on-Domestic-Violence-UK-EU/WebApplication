@@ -9,7 +9,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
 // Contexts
-import { AdminContext } from "./contexts/AdminContext";
+import { AdminContext } from "../../contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     paddingBottom: 30,
   },
-
   dialog: {
     display: "flex",
     flexDirection: "column",
@@ -57,18 +56,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     marginTop: 0,
   },
-  arrowForwardIosIcon: {
-    position: "fixed",
-    top: "50%",
-    right: "5%",
-    color: "white",
-  },
-  arrowBackIosIcon: {
-    position: "fixed",
-    top: "50%",
-    left: "5%",
-    color: "white",
-  },
   textField: {
     width: "80%",
     textDecoration: "none",
@@ -78,22 +65,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 22,
     lineHeight: "32px",
   },
-
-  saveButton: {
-    padding: 0,
-    textTransform: "none",
-    marginBottom: 5,
-    color: "blue",
-    margin: 0,
-  },
 }));
 
 const Modal = ({ item, open, setOpen, setContent }) => {
   const classes = useStyles();
   const [value, setValue] = useState("");
   const { update, remove } = useContext(AdminContext);
-
-  console.log(update);
 
   useEffect(() => {
     setValue(item.content);
@@ -104,7 +81,7 @@ const Modal = ({ item, open, setOpen, setContent }) => {
   };
 
   const onChange = (e) => {
-    setContent(e.target.value);
+    setValue(e.target.value);
   };
 
   return (
@@ -119,7 +96,7 @@ const Modal = ({ item, open, setOpen, setContent }) => {
       <DialogActions className={classes.dialogActions}>
         <IconButton
           onClick={() => {
-            remove();
+            remove(item);
             handleClose();
           }}
         >
@@ -128,7 +105,7 @@ const Modal = ({ item, open, setOpen, setContent }) => {
         <IconButton
           className={classes.close}
           onClick={() => {
-            update(content);
+            update(value, item);
             handleClose();
           }}
         >
@@ -139,25 +116,13 @@ const Modal = ({ item, open, setOpen, setContent }) => {
         </IconButton>
       </DialogActions>
       <div className={classes.body}>
-        {item.type === "text" ? (
-          <TextField
-            className={classes.textField}
-            id="standard-helperText"
-            multiline
-            value={value}
-            onChange={(e) => onChange(e)}
-          />
-        ) : null}
-
-        {item.type === "header" ? (
-          <TextField
-            className={classes.textField}
-            id="standard-helperText"
-            multiline
-            value={value}
-            onChange={(e) => handelChange(e)}
-          />
-        ) : null}
+        <TextField
+          className={classes.textField}
+          id="standard-helperText"
+          multiline
+          value={value}
+          onChange={(e) => onChange(e)}
+        />
       </div>
     </Dialog>
   );

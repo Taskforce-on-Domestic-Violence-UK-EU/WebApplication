@@ -1,13 +1,11 @@
-import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 
 // Components
 import Item from "./Item";
 // Contexts
-import { AdminContext } from "./contexts/AdminContext";
+import { AdminContext } from "../contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -144,16 +142,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Article() {
   const classes = useStyles();
-  const [content, setContent] = useState([]);
-  const { article } = useContext(AdminContext);
+  const { article, content, setContent } = useContext(AdminContext);
 
   useEffect(() => {
     setContent(article.content);
   }, []);
-
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
 
   return (
     <div className={classes.container}>

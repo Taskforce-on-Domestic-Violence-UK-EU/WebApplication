@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
-import Main from "../../components/Admin/Core/Main";
+import Main from "../../components/Admin/Article/Core/Main";
 import MobileArticle from "../../components/MobileArticle";
 import useWitdh from "../../hooks/useWidth";
 import { useEffect } from "react";

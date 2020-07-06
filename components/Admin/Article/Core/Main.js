@@ -1,5 +1,7 @@
 // Components
-import Article from "../Article";
+import { useEffect } from "react";
+// Components
+import Article from "../Content/Article";
 // Contexts
 import { AdminStore } from "../contexts/AdminContext";
 

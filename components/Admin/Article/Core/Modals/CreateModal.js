@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
@@ -6,7 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import { IconButton, Button, ButtonGroup } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 // Contexts
-import { AdminContext } from "./contexts/AdminContext";
+import { AdminContext } from "../../contexts/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Modal = ({ content, setContent, item, open, setOpen }) => {
+const Modal = ({ item, open, setOpen }) => {
   const classes = useStyles();
   const { createItem } = useContext(AdminContext);
 
@@ -101,24 +101,24 @@ const Modal = ({ content, setContent, item, open, setOpen }) => {
   };
 
   const handleCreate = (type) => {
-    let item = null;
+    let new_item = null;
 
     switch (type) {
       case "text":
-        item = { type: "text", content: "new paragraph" };
+        new_item = { type: "text", content: "new paragraph" };
         break;
       case "header":
-        item = { type: "header", content: "new header" };
+        new_item = { type: "header", content: "new header" };
         break;
       case "image":
-        item = { type: "image", content: "new image" };
+        new_item = { type: "image", content: "new image" };
         break;
       default:
         break;
     }
 
-    if (item) {
-      createItem(item);
+    if (new_item) {
+      createItem(new_item, item);
       handleClose();
     }
   };
