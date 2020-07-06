@@ -1,10 +1,24 @@
 import dbConnect from "../../../utils/dbConnect";
 import Article from "../../../models/article";
-import { getArticle } from "./[id]";
 
 export const getArticles = async () => {
   const articles = await Article.find({});
   return articles;
+};
+
+export const createArticle = async () => {
+  const article = await new Article({
+    title: "New Article",
+    author: "Julia New-Author",
+    date: "July 20, 2065",
+    description:
+      "This is a new article, read it an you will have read a new article",
+    image:
+      "https://images.unsplash.com/photo-1507708346190-57ddfc63e830?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+    tags: ["Social Justice", "Equality", "Journalism"],
+    content: [],
+  });
+  return article;
 };
 
 export default async (req, res) => {
@@ -19,15 +33,7 @@ export default async (req, res) => {
   switch (method) {
     case "POST":
       try {
-        let article = new Article({
-          title: body.title,
-          author: body.author,
-          date: body.date,
-          description: body.description,
-          image: body.image,
-          tags: [],
-          content: body.content,
-        });
+        const article = await createArticle();
         article.save();
 
         res.status(201).json({

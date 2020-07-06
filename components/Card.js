@@ -1,11 +1,11 @@
-import AppBar from "./AppBar";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
+
 import Chip from "@material-ui/core/Chip";
-import CardContent from "@material-ui/core/CardContent";
+
 import Link from "next/link";
-import Button from "@material-ui/core/Button";
+
 import { makeStyles } from "@material-ui/core/styles";
+import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -128,6 +128,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Preview({ article, admin = false }) {
   const classes = useStyles();
+  const [tags, setTags] = useState([]);
+
+  console.log(article.tags);
+
+  useEffect(() => {
+    setTags(article.tags);
+  }, [article]);
 
   const determineLink = () => {
     if (admin) return `/admin/${article._id}`;
@@ -148,17 +155,19 @@ function Preview({ article, admin = false }) {
           <h1 className={classes.title}>{article.title}</h1>
           <p className={classes.description}>{article.description}</p>
           <div className={classes.chipArray}>
-            {article.tags.map((tag) => {
-              return (
-                <Chip
-                  size="small"
-                  color="primary"
-                  label={tag}
-                  className={classes.chip}
-                  key={tag}
-                />
-              );
-            })}
+            {tags
+              ? tags.map((tag) => {
+                  return (
+                    <Chip
+                      size="small"
+                      color="primary"
+                      label={tag}
+                      className={classes.chip}
+                      key={tag}
+                    />
+                  );
+                })
+              : null}
           </div>
         </div>
         <div className={classes.imageContainer}>
