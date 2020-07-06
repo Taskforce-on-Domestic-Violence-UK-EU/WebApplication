@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Preview({ article }) {
+function Preview({ article, admin = false }) {
   const classes = useStyles();
   const { width, setWidth } = useWidth();
   const [tags, setTags] = useState([]);
@@ -142,6 +142,13 @@ function Preview({ article }) {
   const organizeTags = () => {
     const i = width < 1225 ? 1 : 2;
     setTags(article.tags.slice(0, i));
+  };
+
+  const determineLink = () => {
+    if (admin) return `/admin/${article._id}`;
+    else {
+      return `/articles/${article._id}`;
+    }
   };
 
   useEffect(() => {
@@ -155,7 +162,7 @@ function Preview({ article }) {
 
   if (article) {
     return (
-      <Link href={"/article"}>
+      <Link href={determineLink()}>
         <Card className={classes.card}>
           {/* <CardContent className={classes.innerWrapper}> */}
           <div className={classes.content}>

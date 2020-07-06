@@ -8,8 +8,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 // Contexts
 import { AdminContext } from "../../contexts/AdminContext";
+import Item from "../../Content/Item";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -65,14 +71,24 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 22,
     lineHeight: "32px",
   },
+  formControl: {
+    marginTop: 20,
+    width: "80%",
+    color: "black",
+  },
 }));
 
 const Modal = ({ item, open, setOpen, setContent }) => {
   const classes = useStyles();
   const [value, setValue] = useState("");
-  const { update, remove } = useContext(AdminContext);
+  const [position, setPosition] = useState(0);
+  const { update, remove, changePosition, getIndex, content } = useContext(
+    AdminContext
+  );
 
   useEffect(() => {
+    let index = getIndex(item);
+    setPosition(index);
     setValue(item.content);
   }, [item]);
 
@@ -123,6 +139,28 @@ const Modal = ({ item, open, setOpen, setContent }) => {
           value={value}
           onChange={(e) => onChange(e)}
         />
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-simple-select-helper-label">Position</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            value={position}
+            onChange={async (e) => {
+              await setPosition(e.target.value);
+              await changePosition(e.target.value, item);
+              handleClose();
+            }}
+          >
+            {content.map((c) => {
+              let pos = getIndex(c);
+              return (
+                <MenuItem key={pos} value={pos}>
+                  {pos}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </div>
     </Dialog>
   );

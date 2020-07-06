@@ -5,9 +5,7 @@ export const AdminContext = createContext(null);
 export const AdminStore = ({ children, article }) => {
   const [content, setContent] = useState([]);
 
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
+  useEffect(() => {}, [content]);
 
   const getIndex = (item) => content.indexOf(item);
 
@@ -31,6 +29,16 @@ export const AdminStore = ({ children, article }) => {
     ]);
   };
 
+  const changePosition = async (position, item) => {
+    remove(item);
+    setContent((content) => [
+      ...content.slice(0, position),
+      item,
+      // Beacuse content.length decreases by 1
+      ...content.slice(position),
+    ]);
+  };
+
   const remove = (item) => {
     setContent((content) => content.filter((i) => i !== item));
   };
@@ -45,6 +53,7 @@ export const AdminStore = ({ children, article }) => {
         createItem,
         update,
         remove,
+        changePosition,
       }}
     >
       {children}

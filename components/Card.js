@@ -126,10 +126,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Preview({ article }) {
+function Preview({ article, admin = false }) {
   const classes = useStyles();
+
+  const determineLink = () => {
+    if (admin) return `/admin/${article._id}`;
+    else {
+      return `/articles/${article._id}`;
+    }
+  };
+
   return (
-    <Link href={"/article"}>
+    <Link href={determineLink()}>
       <Card className={classes.card}>
         {/* <CardContent className={classes.innerWrapper}> */}
         <div className={classes.content}>

@@ -6,6 +6,23 @@ export const getArticle = async (id) => {
   return article;
 };
 
+export const updateArticle = async (id, body) => {
+  const article = await Article.findByIdAndUpdate(
+    { _id: id },
+    {
+      content: body.content,
+      // title: body.title,
+      // image: body.image,
+      // description: body.description,
+      // tags: body.tags,
+    },
+    {
+      new: true,
+    }
+  );
+  return article;
+};
+
 export default async (req, res) => {
   const {
     query: { id },
@@ -19,19 +36,7 @@ export default async (req, res) => {
     case "PUT":
       if (method === "PUT") {
         try {
-          const article = await Article.findByIdAndUpdate(
-            { _id: id },
-            {
-              content: body.content,
-              // title: body.title,
-              // image: body.image,
-              // description: body.description,
-              // tags: body.tags,
-            },
-            {
-              new: true,
-            }
-          );
+          const article = await updateArticle(id, body);
           res.status(200).json({
             status: "success",
             data: article,

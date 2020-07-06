@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import { useEffect, useContext } from "react";
-
 // Components
 import Item from "./Item";
 // Contexts

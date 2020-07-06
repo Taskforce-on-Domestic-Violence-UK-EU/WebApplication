@@ -51,13 +51,14 @@ export default function Page({ article }) {
 
 // TODO : Switch to Static ?
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ params }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
 
   await dbConnect();
 
-  const result = await getArticle("5eebf473b773520418a2bfc8");
+  const id = params.id;
+  const result = await getArticle(id);
   const json_string = JSON.stringify(result);
   const article = JSON.parse(json_string);
 

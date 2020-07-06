@@ -135,10 +135,12 @@ export default function Home({ data }) {
         </Head>
         <Layout>
           <div className={classes.Wrapper}>
-            <Card article={feature} />
+            <Card admin={true} article={feature} />
             <div className={classes.smallCardWrapper}>
               {articles.map((article) => {
-                return <SmallCard key={article._id} article={article} />;
+                return (
+                  <SmallCard admin={true} key={article._id} article={article} />
+                );
               })}
             </div>
           </div>
