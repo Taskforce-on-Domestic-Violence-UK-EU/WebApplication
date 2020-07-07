@@ -1,6 +1,5 @@
-export const updateArticle = async (article, content) => {
+export const updateArticle = async (article, body) => {
   const id = article._id;
-  const body = { content: content };
 
   const res = await fetch(`/api/articles/${id}`, {
     method: "PUT",

@@ -4,6 +4,19 @@ export const AdminContext = createContext(null);
 
 export const AdminStore = ({ children, article }) => {
   const [content, setContent] = useState([]);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    setTitle(article.title);
+    setAuthor(article.author);
+    setDate(article.date);
+    setDescription(article.description);
+    setContent(article.content);
+  }, []);
 
   useEffect(() => {}, [content]);
 
@@ -49,6 +62,14 @@ export const AdminStore = ({ children, article }) => {
         article,
         content,
         setContent,
+        title,
+        setTitle,
+        author,
+        setAuthor,
+        date,
+        setDate,
+        description,
+        setDescription,
         getIndex,
         createItem,
         update,

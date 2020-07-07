@@ -1,6 +1,14 @@
 import dbConnect from "../../../utils/dbConnect";
 import Article from "../../../models/article";
 
+const createKeys = async (body) => {
+  const dictionary = {};
+  for (var key in body) {
+    dictionary[key] = body[key];
+  }
+  return dictionary;
+};
+
 export const getArticle = async (id) => {
   const article = await Article.findById(id);
   return article;
@@ -9,13 +17,7 @@ export const getArticle = async (id) => {
 export const updateArticle = async (id, body) => {
   const article = await Article.findByIdAndUpdate(
     { _id: id },
-    {
-      content: body.content,
-      // title: body.title,
-      // image: body.image,
-      // description: body.description,
-      // tags: body.tags,
-    },
+    await createKeys(body),
     {
       new: true,
     }

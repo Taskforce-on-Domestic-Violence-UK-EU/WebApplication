@@ -141,7 +141,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Article() {
   const classes = useStyles();
-  const { article, content, setContent } = useContext(AdminContext);
+  const {
+    article,
+    content,
+    setContent,
+    title,
+    setTitle,
+    date,
+    setDate,
+    author,
+    setAuthor,
+  } = useContext(AdminContext);
 
   useEffect(() => {
     setContent(article.content);
@@ -150,7 +160,7 @@ function Article() {
   return (
     <div className={classes.container}>
       <div className={classes.overview}>
-        <h1 className={classes.title}>{article.title}</h1>
+        <h1 className={classes.title}>{title}</h1>
       </div>
       <div className={classes.article}>
         <div className={classes.chipArray}>
@@ -167,8 +177,8 @@ function Article() {
           })}
         </div>
         <div className={classes.innerWrapper}>
-          <h2 className={classes.author}>{article.author}</h2>
-          <h2 className={classes.date}>{article.date}</h2>
+          <h2 className={classes.author}>{author}</h2>
+          <h2 className={classes.date}>{date}</h2>
         </div>
 
         <div className={classes.body}>
