@@ -7,5 +7,5 @@ export const createArticle = async () => {
       "Content-Type": "application/json",
     },
   });
-  return await res.json;
+  return await res.json();
 };

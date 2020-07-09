@@ -11,20 +11,24 @@ import useWidth from "../hooks/useWidth";
 import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   card: {
     display: "flex",
     minHeight: "20%",
     justifyContent: "space-between",
-    width: "48%",
+    width: "38vw",
+    marginBottom: 30,
     height: "100%",
-    maxHeight: 200,
 
     "&:hover": {
       opacity: 0.8,
       cursor: "pointer",
     },
-
-    marginBottom: 30,
     borderRadius: 10,
     boxShadow: "none",
   },
@@ -134,51 +138,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Preview({ article, admin = false }) {
-  const classes = useStyles();
-  const { width, setWidth } = useWidth();
-  const [tags, setTags] = useState([]);
+const Preview = React.forwardRef(
+  ({ onClick, href, article, admin = false }, ref) => {
+    const classes = useStyles();
+    const { width, setWidth } = useWidth();
+    const [tags, setTags] = useState([]);
 
-  const organizeTags = () => {
-    const i = width < 1225 ? 1 : 2;
-    setTags(article.tags.slice(0, i));
-  };
+    const organizeTags = () => {
+      const i = width < 1225 ? 1 : 2;
+      setTags(article.tags.slice(0, i));
+    };
 
-  const determineLink = () => {
-    if (admin) return `/admin/${article._id}`;
-    else {
-      return `/articles/${article._id}`;
-    }
-  };
+    const determineLink = () => {
+      if (admin) return `/admin/${article._id}`;
+      else {
+        return `/articles/${article._id}`;
+      }
+    };
 
-  useEffect(() => {
-    setWidth(window.innerWidth);
-  }, []);
+    useEffect(() => {
+      setWidth(window.innerWidth);
+    }, []);
 
-  useEffect(() => {
-    console.log(width);
-    organizeTags();
-  }, [width]);
+    useEffect(() => {
+      console.log(width);
+      organizeTags();
+    }, [width]);
 
-  if (article) {
-    return (
-      <Link href={determineLink()}>
-        <Card className={classes.card}>
-          {/* <CardContent className={classes.innerWrapper}> */}
-          <div className={classes.content}>
-            <div className={classes.wrapper}>
-              <div className={classes.details}>
-                <h2 className={classes.author}>{article.author}</h2>
-                <h2 className={classes.date}>{article.date}</h2>
+    if (article) {
+      return (
+        <a href={href} onClick={onClick} ref={ref} className={classes.wrapper}>
+          <Card className={classes.card}>
+            <div className={classes.content}>
+              <div className={classes.wrapper}>
+                <div className={classes.details}>
+                  <h2 className={classes.author}>{article.author}</h2>
+                  <h2 className={classes.date}>{article.date}</h2>
+                </div>
+                <h1
+                  style={{ fontSize: width < 1200 ? 15 : 17 }}
+                  className={classes.title}
+                >
+                  {article.title}
+                </h1>
               </div>
-              <h1
-                style={{ fontSize: width < 1200 ? 15 : 17 }}
-                className={classes.title}
-              >
-                {article.title}
-              </h1>
-            </div>
-            {/* <p className={classes.description}>
+              {/* <p className={classes.description}>
             The term ‘domestic abuse’ is tightly wrapped in a layer of
             misconceptions and misunderstandings: widespread inaccurate beliefs
             about what abuse looks like, and what a victim looks like, extend
@@ -186,34 +190,34 @@ function Preview({ article, admin = false }) {
             services, including the police service.
           </p> */}
 
-            <div className={classes.chipArray}>
-              {tags.map((tag) => {
-                return (
-                  <Chip
-                    size="small"
-                    color="primary"
-                    label={tag}
-                    className={classes.chip}
-                    key={tag}
-                  />
-                );
-              })}
+              <div className={classes.chipArray}>
+                {tags.map((tag) => {
+                  return (
+                    <Chip
+                      size="small"
+                      color="primary"
+                      label={tag}
+                      className={classes.chip}
+                      key={tag}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          <div
-            style={{
-              width: width < 1200 ? 200 : 200,
-              height: width < 1200 ? 200 : 200,
-            }}
-            className={classes.imageContainer}
-          >
-            <img className={classes.image} src={article.image} />
-          </div>
-          {/* </CardContent> */}
-        </Card>
-      </Link>
-    );
+            <div
+              style={{
+                width: width < 1200 ? 200 : 200,
+                height: width < 1200 ? 200 : 200,
+              }}
+              className={classes.imageContainer}
+            >
+              <img className={classes.image} src={article.image} />
+            </div>
+          </Card>
+        </a>
+      );
+    }
   }
-}
+);
 
 export default Preview;

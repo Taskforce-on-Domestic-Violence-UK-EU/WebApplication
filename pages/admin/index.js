@@ -13,7 +13,7 @@ export default function Home({ data }) {
         <title>To the Core</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main data={data} />
+      <Main data={data} admin={true} />
     </div>
   );
 }

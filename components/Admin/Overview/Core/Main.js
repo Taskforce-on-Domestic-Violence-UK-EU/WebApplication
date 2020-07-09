@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "../../../Layout";
 import Card from "../../../Card";
 import SmallCard from "../../../SmallCard";
+import Chip from "@material-ui/core/Chip";
+import MobileCard from "../../../MobileCard";
 import { makeStyles } from "@material-ui/core/styles";
+import { useEffect, useState } from "react";
+import useWitdh from "../../../../hooks/useWidth";
+import Link from "next/link";
 import AddButton from "./FloatingActionButton";
 
 const useStyles = makeStyles((theme) => ({
-  Wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: 20,
-  },
-
   title: {
     textDecoration: "none",
     color: "black",
@@ -74,16 +72,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home({ data }) {
+export default function Home({ data, admin }) {
   // const [articles, setArticles] = useState([]);
   const classes = useStyles();
   const [feature, setFeature] = useState({});
   const [articles, setArticles] = useState([]);
+  const { width, setWidth } = useWitdh();
+
+  const determineLink = (id) => {
+    if (admin) return `/admin/${id}`;
+    else {
+      return `/articles/${id}`;
+    }
+  };
+
+  const determinePlaceHolder = () => {
+    if (admin) return `/admin/[id]`;
+    else {
+      return `/articles/[id]`;
+    }
+  };
 
   const organizeArticles = async (articles) => {
     const list = [];
-
-    console.log(articles);
 
     await articles.forEach((article) => {
       if (article.feature) {
@@ -96,28 +107,108 @@ export default function Home({ data }) {
   };
 
   useEffect(() => {
+    setWidth(window.innerWidth);
     organizeArticles(data);
-  }, [data]);
+  }, []);
 
-  return (
-    <div>
-      <AddButton />
-      <Head>
-        <title>To the Core</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <div className={classes.Wrapper}>
-          <Card admin={true} article={feature} />
+  if (width == 0) {
+    return null;
+  }
+
+  if (width < 1000) {
+    return (
+      <div>
+        <Head>
+          <title>To the Core</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Layout>
+          <h1
+            style={{ fontSize: width < 500 ? 50 : 22 }}
+            className={classes.title}
+          >
+            Core Issues, Real Analysis.
+          </h1>
+          <h2 className={classes.copy}>A New Type of Journalism</h2>
+
+          <MobileCard />
+        </Layout>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Head>
+          <title>To the Core</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Layout>
+          {admin ? <AddButton /> : null}
+          <div className={classes.copyWrapper}>
+            {/* <h1
+              style={{ fontSize: width < 500 ? 50 : 16 }}
+              className={classes.title}
+            >
+              Core Issues, Real Analysis.
+            </h1> */}
+            <div className={classes.chipArray}>
+              <Chip
+                size="small"
+                color="primary"
+                label={"Criminal Law"}
+                className={classes.chip}
+              />
+              <Chip
+                size="small"
+                color="primary"
+                label={"Social Justice"}
+                className={classes.chip}
+              />
+              <Chip
+                size="small"
+                color="primary"
+                label={"Immigration Law"}
+                className={classes.chip}
+              />
+              <Chip
+                size="small"
+                color="primary"
+                label={"Human Rights"}
+                className={classes.chip}
+              />
+              <Chip
+                size="small"
+                color="primary"
+                label={"Education"}
+                className={classes.chip}
+              />
+              <Chip
+                size="small"
+                color="primary"
+                label={"Lockdown"}
+                className={classes.chip}
+              />
+            </div>
+            {/* <h2 className={classes.copy}>A New Type of Journalism</h2> */}
+          </div>
+          <Link href={determinePlaceHolder()} as={determineLink(feature._id)}>
+            <Card article={feature} />
+          </Link>
           <div className={classes.smallCardWrapper}>
             {articles.map((article) => {
               return (
-                <SmallCard admin={true} key={article._id} article={article} />
+                <Link
+                  key={article._id}
+                  href={determinePlaceHolder()}
+                  as={determineLink(article._id)}
+                >
+                  <SmallCard article={article} />
+                </Link>
               );
             })}
           </div>
-        </div>
-      </Layout>
-    </div>
-  );
+        </Layout>
+      </div>
+    );
+  }
 }

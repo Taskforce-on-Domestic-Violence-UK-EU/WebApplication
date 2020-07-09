@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
-import Article from "../../components/Article";
+import Main from "../../components/Article";
+import Article from "../../models/article";
 import MobileArticle from "../../components/MobileArticle";
 import useWitdh from "../../hooks/useWidth";
 import { useEffect } from "react";
-import { getArticle } from "../api/articles/[id]";
 import dbConnect from "../../utils/dbConnect";
 
 export default function Page({ article }) {
@@ -42,7 +42,7 @@ export default function Page({ article }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
-          <Article article={article} />
+          <Main article={article} />
         </Layout>
       </div>
     );
@@ -51,36 +51,36 @@ export default function Page({ article }) {
 
 // TODO : Switch to Static ?
 
-export async function getServerSideProps({ params }) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
+// export async function getServerSideProps({ params }) {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
 
+//   await dbConnect();
+
+//   const id = params.id;
+//   const result = await getArticle(id);
+//   const json_string = JSON.stringify(result);
+//   const article = JSON.parse(json_string);
+
+//   // By returning { props: posts }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       article: article,
+//     },
+//   };
+// }
+
+export async function getServerSideProps({ params }) {
   await dbConnect();
 
-  const id = params.id;
-  const result = await getArticle(id);
-  const json_string = JSON.stringify(result);
-  const article = JSON.parse(json_string);
+  var article = await Article.findById(params.id);
+  article = JSON.stringify(article);
+  article = JSON.parse(article);
 
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
   return {
     props: {
       article: article,
     },
   };
 }
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`http://localhost:3000/api/articles`);
-//   const result = await res.json();
-
-//   // By returning { props: posts }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return {
-//     props: {
-//       articles: result.data,
-//     },
-//   };
-// }

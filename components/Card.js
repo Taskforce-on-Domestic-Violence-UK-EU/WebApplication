@@ -8,6 +8,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   card: {
     display: "flex",
     minHeight: 500,
@@ -126,57 +132,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Preview({ article, admin = false }) {
-  const classes = useStyles();
-  const [tags, setTags] = useState([]);
+const Preview = React.forwardRef(
+  ({ onClick, href, article, admin = false }, ref) => {
+    const classes = useStyles();
+    const [tags, setTags] = useState([]);
 
-  console.log(article.tags);
+    console.log(article.tags);
 
-  useEffect(() => {
-    setTags(article.tags);
-  }, [article]);
+    useEffect(() => {
+      setTags(article.tags);
+    }, [article]);
 
-  const determineLink = () => {
-    if (admin) return `/admin/${article._id}`;
-    else {
-      return `/articles/${article._id}`;
-    }
-  };
-
-  return (
-    <Link href={determineLink()}>
-      <Card className={classes.card}>
-        {/* <CardContent className={classes.innerWrapper}> */}
-        <div className={classes.content}>
-          <div className={classes.details}>
-            <h2 className={classes.author}>{article.author}</h2>
-            <h2 className={classes.date}>{article.date}</h2>
+    return (
+      <a href={href} onClick={onClick} ref={ref} className={classes.wrapper}>
+        <Card className={classes.card}>
+          {/* <CardContent className={classes.innerWrapper}> */}
+          <div className={classes.content}>
+            <div className={classes.details}>
+              <h2 className={classes.author}>{article.author}</h2>
+              <h2 className={classes.date}>{article.date}</h2>
+            </div>
+            <h1 className={classes.title}>{article.title}</h1>
+            <p className={classes.description}>{article.description}</p>
+            <div className={classes.chipArray}>
+              {tags
+                ? tags.map((tag) => {
+                    return (
+                      <Chip
+                        size="small"
+                        color="primary"
+                        label={tag}
+                        className={classes.chip}
+                        key={tag}
+                      />
+                    );
+                  })
+                : null}
+            </div>
           </div>
-          <h1 className={classes.title}>{article.title}</h1>
-          <p className={classes.description}>{article.description}</p>
-          <div className={classes.chipArray}>
-            {tags
-              ? tags.map((tag) => {
-                  return (
-                    <Chip
-                      size="small"
-                      color="primary"
-                      label={tag}
-                      className={classes.chip}
-                      key={tag}
-                    />
-                  );
-                })
-              : null}
+          <div className={classes.imageContainer}>
+            <img className={classes.image} src={article.image} />
           </div>
-        </div>
-        <div className={classes.imageContainer}>
-          <img className={classes.image} src={article.image} />
-        </div>
-        {/* </CardContent> */}
-      </Card>
-    </Link>
-  );
-}
+          {/* </CardContent> */}
+        </Card>
+      </a>
+    );
+  }
+);
 
 export default Preview;

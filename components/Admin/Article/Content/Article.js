@@ -164,17 +164,19 @@ function Article() {
       </div>
       <div className={classes.article}>
         <div className={classes.chipArray}>
-          {article.tags.map((tag) => {
-            return (
-              <Chip
-                size="small"
-                color="primary"
-                label={tag}
-                className={classes.chip}
-                key={tag}
-              />
-            );
-          })}
+          {article.tags
+            ? article.tags.map((tag) => {
+                return (
+                  <Chip
+                    size="small"
+                    color="primary"
+                    label={tag}
+                    className={classes.chip}
+                    key={tag}
+                  />
+                );
+              })
+            : null}
         </div>
         <div className={classes.innerWrapper}>
           <h2 className={classes.author}>{author}</h2>

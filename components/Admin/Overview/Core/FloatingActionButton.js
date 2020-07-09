@@ -18,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
 
 const create = async () => {
   try {
-    await createArticle();
+    const response = await createArticle();
+    if (response.status === "success") {
+      const article = response.data;
+      Router.push(`/admin/${article._id}`);
+    }
   } catch (error) {
     console.log(error);
   }

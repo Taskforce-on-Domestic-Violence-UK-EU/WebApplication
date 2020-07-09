@@ -16,7 +16,7 @@ export const createArticle = async () => {
     image:
       "https://images.unsplash.com/photo-1507708346190-57ddfc63e830?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     tags: ["Social Justice", "Equality", "Journalism"],
-    content: [],
+    content: [{ type: "text", content: "Hello, this is a new article" }],
   });
   return article;
 };
@@ -34,7 +34,7 @@ export default async (req, res) => {
     case "POST":
       try {
         const article = await createArticle();
-        article.save();
+        await article.save();
         res.status(201).json({
           status: "success",
           data: article,
