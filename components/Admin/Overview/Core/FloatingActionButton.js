@@ -17,8 +17,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const create = async () => {
-  await createArticle();
-  Router.reload();
+  try {
+    await createArticle();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const Main = () => {

@@ -35,7 +35,6 @@ export default async (req, res) => {
       try {
         const article = await createArticle();
         article.save();
-
         res.status(201).json({
           status: "success",
           data: article,

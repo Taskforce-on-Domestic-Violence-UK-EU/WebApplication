@@ -188,12 +188,15 @@ export default function Home({ data }) {
   }
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   await dbConnect();
 
   const result = await getArticles();
+
   const json_string = JSON.stringify(result);
   const articles = JSON.parse(json_string);
+
+  console.log(articles);
 
   return {
     props: {
