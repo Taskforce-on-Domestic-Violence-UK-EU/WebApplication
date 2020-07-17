@@ -1,6 +1,8 @@
+import { useState } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // Components
+import ImageModal from "./ImageModal";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -33,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     alignItems: "center",
     marginBottom: "1vh",
+    "&:hover": {
+      opacity: 0.5,
+      cursor: "pointer",
+    },
   },
   image: {
     width: "100%",
@@ -43,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Value({ item }) {
   const classes = useStyles();
+  const [openImage, setOpenImage] = useState(false);
 
   switch (item.type) {
     case "text":
@@ -54,7 +61,17 @@ function Value({ item }) {
     case "image":
       return (
         <div className={classes.imageContainer}>
-          <img className={classes.image} src={item.content} alt="image" />
+          <ImageModal
+            image={item.content}
+            open={openImage}
+            setOpen={setOpenImage}
+          />
+          <img
+            className={classes.image}
+            onClick={() => setOpenImage(true)}
+            src={item.content}
+            alt="image"
+          />
         </div>
       );
 

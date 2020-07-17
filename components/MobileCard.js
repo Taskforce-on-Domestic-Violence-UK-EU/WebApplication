@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     display: "flex",
-    width: "100%",
+    width: 400,
+    height: 200,
     minHeight: 200,
     alignItems: "center",
     padding: 0,
@@ -113,35 +114,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Preview() {
+function Preview({ article }) {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
       <Link href={"/article"}>
         <CardContent className={classes.innerWrapper}>
           <div className={classes.imageContainer}>
-            <img
-              className={classes.image}
-              src="https://images.unsplash.com/photo-1473123091594-424e04babfe1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-            />
+            <img className={classes.image} src={article.image} />
           </div>
 
           <div className={classes.content}>
             <div className={classes.details}>
-              <h2 className={classes.author}>Safia Bolton</h2>
-              <h2 className={classes.date}>May 20, 2020</h2>
+              <h2 className={classes.author}>{article.author}</h2>
+              <h2 className={classes.date}>{article.date}</h2>
             </div>
-            <h1 className={classes.title}>
-              Why Are Domestic Abuse Perpetrators Getting Away With Their
-              Crimes?
-            </h1>
-            <p className={classes.description}>
-              The term ‘domestic abuse’ is tightly wrapped in a layer of
-              misconceptions and misunderstandings: widespread inaccurate
-              beliefs about what abuse looks like, and what a victim looks like,
-              extend not only to the general public, but also exist within
-              essential services, including the police service.
-            </p>
+            <h1 className={classes.title}>{article.title}</h1>
+            <p className={classes.description}>{article.description}</p>
             <div className={classes.chipArray}>
               <Chip
                 color="primary"

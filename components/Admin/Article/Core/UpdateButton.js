@@ -21,9 +21,15 @@ const useStyles = makeStyles((theme) => ({
 
 const UpdateButton = () => {
   const classes = useStyles();
-  const { article, content, title, author, date, description } = useContext(
-    AdminContext
-  );
+  const {
+    article,
+    content,
+    title,
+    author,
+    date,
+    description,
+    image,
+  } = useContext(AdminContext);
 
   const update = async () => {
     const body = {
@@ -32,6 +38,7 @@ const UpdateButton = () => {
       author: author,
       date: date,
       description: description,
+      image: image,
     };
 
     await updateArticle(article, body);

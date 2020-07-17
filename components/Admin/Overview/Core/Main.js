@@ -123,15 +123,17 @@ export default function Home({ data, admin }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
-          <h1
-            style={{ fontSize: width < 500 ? 50 : 22 }}
-            className={classes.title}
-          >
-            Core Issues, Real Analysis.
-          </h1>
-          <h2 className={classes.copy}>A New Type of Journalism</h2>
-
-          <MobileCard />
+          {articles.map((article) => {
+            return (
+              <Link
+                key={article._id}
+                href={determinePlaceHolder()}
+                as={determineLink(article._id)}
+              >
+                <MobileCard article={article} />
+              </Link>
+            );
+          })}
         </Layout>
       </div>
     );

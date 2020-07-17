@@ -36,9 +36,7 @@ export default function Page({ article }) {
     return (
       <div>
         <Head>
-          <title>
-            Gentle medicine could radically transform medical practice
-          </title>
+          <title>{article.title}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>

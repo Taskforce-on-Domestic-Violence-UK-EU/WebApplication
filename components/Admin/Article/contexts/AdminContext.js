@@ -8,6 +8,8 @@ export const AdminStore = ({ children, article }) => {
   const [author, setAuthor] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [feature, setFeature] = useState(false);
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -16,6 +18,8 @@ export const AdminStore = ({ children, article }) => {
     setDate(article.date);
     setDescription(article.description);
     setContent(article.content);
+    setImage(article.image);
+    setFeature(article.feature);
   }, []);
 
   useEffect(() => {}, [content]);
@@ -70,6 +74,10 @@ export const AdminStore = ({ children, article }) => {
         setDate,
         description,
         setDescription,
+        image,
+        setImage,
+        feature,
+        setFeature,
         getIndex,
         createItem,
         update,

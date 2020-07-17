@@ -1,10 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { IconButton } from "@material-ui/core";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Chip from "@material-ui/core/Chip";
 import { useEffect, useContext } from "react";
 // Components
 import Item from "./Item";
 // Contexts
 import { AdminContext } from "../contexts/AdminContext";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -184,6 +188,16 @@ function Article() {
         </div>
 
         <div className={classes.body}>
+          <IconButton
+            onClick={() =>
+              setContent([
+                { type: "text", content: "This is a new paragraph" },
+                ...content,
+              ])
+            }
+          >
+            <AddCircleIcon />
+          </IconButton>
           {content.map((item) => {
             let i = content.indexOf(item);
             return <Item key={i} item={item} />;

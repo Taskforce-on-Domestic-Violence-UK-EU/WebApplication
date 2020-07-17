@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100vw",
+    backgroundColor: "white",
   },
 
   body: {

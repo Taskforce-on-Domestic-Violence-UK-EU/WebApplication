@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   dialogActions: {
     zIndex: 2,
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     width: "100%",
     height: 65,
     backgroundColor: "white",
@@ -90,6 +90,8 @@ const Modal = ({ item, open, setOpen, setContent }) => {
     setDate,
     description,
     setDescription,
+    image,
+    setImage,
     content,
   } = useContext(AdminContext);
 
@@ -111,15 +113,6 @@ const Modal = ({ item, open, setOpen, setContent }) => {
       onClose={handleClose}
     >
       <DialogActions className={classes.dialogActions}>
-        <IconButton
-          className={classes.close}
-          onClick={() => {
-            update(value, item);
-            handleClose();
-          }}
-        >
-          <EditIcon />
-        </IconButton>
         <IconButton className={classes.close} onClick={handleClose}>
           <CloseIcon />
         </IconButton>
@@ -156,6 +149,14 @@ const Modal = ({ item, open, setOpen, setContent }) => {
           multiline
           value={description}
           onChange={(e) => onChange(e, setDescription)}
+        />
+        <TextField
+          className={classes.textField}
+          label="Image"
+          id="standard-helperText"
+          multiline
+          value={image}
+          onChange={(e) => onChange(e, setImage)}
         />
       </div>
     </Dialog>

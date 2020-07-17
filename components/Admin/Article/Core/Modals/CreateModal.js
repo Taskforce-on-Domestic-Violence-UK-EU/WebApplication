@@ -111,7 +111,11 @@ const Modal = ({ item, open, setOpen }) => {
         new_item = { type: "header", content: "new header" };
         break;
       case "image":
-        new_item = { type: "image", content: "new image" };
+        new_item = {
+          type: "image",
+          content:
+            "https://images.unsplash.com/photo-1514557718210-26e452f8fab0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        };
         break;
       default:
         break;
@@ -145,7 +149,7 @@ const Modal = ({ item, open, setOpen }) => {
         >
           <Button onClick={() => handleCreate("text")}>Text</Button>
           <Button onClick={() => handleCreate("header")}>Header</Button>
-          <Button>Image</Button>
+          <Button onClick={() => handleCreate("image")}>Image</Button>
         </ButtonGroup>
       </div>
     </Dialog>
