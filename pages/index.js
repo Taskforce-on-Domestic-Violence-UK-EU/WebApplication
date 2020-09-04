@@ -1,30 +1,57 @@
 import Head from "next/head";
-import Main from "../components/Admin/Overview/Core/Main";
-import dbConnect from "../utils/dbConnect";
-import { getArticles } from "./api/articles/index";
 
-export default function Home({ data }) {
+export default function Home() {
   return (
-    <div>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Head>
-        <title>To the Core</title>
+        <title>Covid 19 Task Force on Domestic Violence UK & EU</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main data={data} />
+      <h1
+        style={{
+          fontFamily: "Playfair Display, serif",
+          fontSize: 52,
+          width: "60%",
+          textAlign: "left",
+        }}
+      >
+        Covid 19 Task Force on Domestic Violence UK & EU
+      </h1>
+
+      <p
+        style={{
+          fontFamily: "Frank Ruhl Libre, serif",
+          fontWeight: 300,
+          fontSize: 29,
+          width: "60%",
+          textAlign: "left",
+        }}
+      >
+        Hello & welcome. We are currently developing our application. Things
+        should be up and running shortly. Current proposed release date is :
+        <br />
+        <br />
+        <p
+          style={{
+            fontFamily: "Frank Ruhl Libre, serif",
+            fontWeight: 500,
+            fontSize: 32,
+            width: "60%",
+            textAlign: "left",
+          }}
+        >
+          October 1st, 2020.
+        </p>
+      </p>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  await dbConnect();
-
-  const result = await getArticles();
-  const json_string = JSON.stringify(result);
-  const articles = JSON.parse(json_string);
-
-  return {
-    props: {
-      data: articles,
-    },
-  };
 }
