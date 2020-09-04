@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Button } from "@material-ui/core";
 
 export default function Home() {
   return (
@@ -36,8 +37,8 @@ export default function Home() {
           textAlign: "left",
         }}
       >
-        Hello & welcome. We are currently developing our application. Things
-        should be up and running shortly. Current proposed release date is :
+        Hello! We are currently developing our application. Things should be up
+        and running shortly. Current proposed release date is :
         <br />
         <br />
         <p
