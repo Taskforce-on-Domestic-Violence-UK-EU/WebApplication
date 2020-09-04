@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
     overflow: "scroll",
     minHeight: "100vh",
     minWidth: "100vw",

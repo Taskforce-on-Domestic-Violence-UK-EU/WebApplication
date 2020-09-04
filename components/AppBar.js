@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100vw",
     flexGrow: 1,
     position: "fixed",
-    borderBottom: "1px solid #f0f0f0",
 
     height: 75,
   },
@@ -87,7 +86,9 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Link href="/">
-            <a className={classes.logo}>To the Core</a>
+            <a className={classes.logo}>
+              Task Force on Domestic Violence UK & EU
+            </a>
           </Link>
         </Toolbar>
       </AppBar>
