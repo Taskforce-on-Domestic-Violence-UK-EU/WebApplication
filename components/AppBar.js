@@ -7,6 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import SideDrawer from "./Drawer";
 import Link from "next/link";
 
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar({}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [anchor, setAnchor] = useState("left");
+  const [anchor, setAnchor] = useState("top");
 
   return (
     <div className={classes.root}>
@@ -71,7 +72,7 @@ export default function ButtonAppBar({}) {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon />
+            <ArrowDropDownIcon />
           </IconButton>
           <Link href="/">
             <a className={classes.logo}>Task Force UK & EU</a>

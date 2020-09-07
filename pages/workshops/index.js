@@ -1,15 +1,11 @@
 import Head from "next/head";
-import Link from "next/link";
-import Layout from "../components/Layout";
-import { Button } from "@material-ui/core";
-import HorizontalGrid from "../components/HorizontalGrid";
-import dbConnect from "../utils/dbConnect";
-import { getArticles } from "./api/articles/index";
-import { getWorkshops } from "./api/workshops/index";
-import { getOrganizations } from "./api/organizations";
+import Layout from "../../components/Layout";
+import HorizontalGrid from "../../components/HorizontalGrid";
+import dbConnect from "../../utils/dbConnect";
+import { getWorkshops } from "../api/workshops/index";
 
 export default function Home({ data }) {
-  const { articles, workshops, organizations } = data;
+  const { workshops } = data;
 
   return (
     <div
@@ -38,7 +34,7 @@ export default function Home({ data }) {
           marginTop: 100,
         }}
       >
-        Covid 19 Task Force on Domestic Violence UK & EU
+        Workshops
       </h1>
 
       <p
@@ -52,7 +48,7 @@ export default function Home({ data }) {
           marginBottom: 30,
         }}
       >
-        Welcome to the Task Force Directory.
+        Welcome to the Workshops Directory.
         <br />
         <br />
       </p>
@@ -66,38 +62,8 @@ export default function Home({ data }) {
           marginBottom: 30,
         }}
       >
-        Organization Directory
+        Upcoming
       </header>
-      <HorizontalGrid data={organizations} />
-      <header
-        style={{
-          fontFamily: "Frank Ruhl Libre, serif",
-          fontWeight: 500,
-          fontSize: 24,
-          width: "60%",
-          textAlign: "left",
-          marginBottom: 30,
-          marginTop: 45,
-        }}
-      >
-        Articles
-      </header>
-      <HorizontalGrid data={articles} />
-      <Link href="/workshops">
-        <header
-          style={{
-            fontFamily: "Frank Ruhl Libre, serif",
-            fontWeight: 500,
-            fontSize: 24,
-            width: "60%",
-            textAlign: "left",
-            marginBottom: 30,
-            marginTop: 45,
-          }}
-        >
-          Workshops
-        </header>
-      </Link>
       <HorizontalGrid data={workshops} />
     </div>
   );
@@ -105,6 +71,8 @@ export default function Home({ data }) {
 
 export async function getServerSideProps() {
   await dbConnect();
+
+  // TODO : Store this function in general util & reuse
 
   const retrieveData = async (callback) => {
     if (callback) {
@@ -117,13 +85,11 @@ export async function getServerSideProps() {
     }
   };
 
-  let articles = await retrieveData(getArticles);
   let workshops = await retrieveData(getWorkshops);
-  let organizations = await retrieveData(getOrganizations);
 
   return {
     props: {
-      data: { articles, workshops, organizations },
+      data: { workshops },
     },
   };
 }
