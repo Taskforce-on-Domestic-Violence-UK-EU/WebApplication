@@ -84,8 +84,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "90%",
+    margin: 0,
+    padding: 0,
     marginBottom: 20,
-    marginLeft: 5,
   },
   author: {
     color: "black",

@@ -4,8 +4,12 @@ import { Button } from "@material-ui/core";
 import HorizontalGrid from "../components/HorizontalGrid";
 import dbConnect from "../utils/dbConnect";
 import { getArticles } from "./api/articles/index";
+import { getWorkshops } from "./api/workshops/index";
+import { getOrganizations } from "./api/organizations";
 
 export default function Home({ data }) {
+  const { articles, workshops, organizations } = data;
+
   return (
     <div
       style={{
@@ -63,7 +67,7 @@ export default function Home({ data }) {
       >
         Organization Directory
       </header>
-      <HorizontalGrid data={data} />
+      <HorizontalGrid data={organizations} />
       <header
         style={{
           fontFamily: "Frank Ruhl Libre, serif",
@@ -77,7 +81,7 @@ export default function Home({ data }) {
       >
         Articles
       </header>
-      <HorizontalGrid data={data} />
+      <HorizontalGrid data={articles} />
       <header
         style={{
           fontFamily: "Frank Ruhl Libre, serif",
@@ -91,7 +95,7 @@ export default function Home({ data }) {
       >
         Workshops
       </header>
-      <HorizontalGrid data={data} />
+      <HorizontalGrid data={workshops} />
     </div>
   );
 }
@@ -99,13 +103,24 @@ export default function Home({ data }) {
 export async function getServerSideProps() {
   await dbConnect();
 
-  const result = await getArticles();
-  const json_string = JSON.stringify(result);
-  const articles = JSON.parse(json_string);
+  const retrieveData = async (callback) => {
+    if (callback) {
+      const result = await callback();
+      const json_string = JSON.stringify(result);
+      const data = JSON.parse(json_string);
+      return data;
+    } else {
+      throw new Error("No Callback Was Given");
+    }
+  };
+
+  let articles = await retrieveData(getArticles);
+  let workshops = await retrieveData(getWorkshops);
+  let organizations = await retrieveData(getOrganizations);
 
   return {
     props: {
-      data: articles,
+      data: { articles, workshops, organizations },
     },
   };
 }
