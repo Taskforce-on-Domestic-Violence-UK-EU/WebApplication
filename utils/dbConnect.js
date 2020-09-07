@@ -11,7 +11,11 @@ async function dbConnect() {
 
   /* connecting to our database */
   const db = await mongoose.connect(
-    "mongodb+srv://SafiaBolton:Safia123@cluster0-b9lkx.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "mongodb+srv://" +
+      process.env.MONGODB_USERNAME +
+      ":" +
+      process.env.MONGODB_PASSWORD +
+      "@assets.kpfjo.mongodb.net/<dbname>?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

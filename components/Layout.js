@@ -1,5 +1,7 @@
+import { useState } from "react";
+// Components
 import AppBar from "./AppBar";
-import Container from "@material-ui/core/Container";
+// Material UI
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -8,8 +10,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     overflow: "scroll",
-    minHeight: "100vh",
-    minWidth: "100vw",
     zIndex: 0,
   },
 }));
@@ -19,7 +19,7 @@ function Layout(props) {
   return (
     <div>
       <AppBar />
-      <Container className={classes.layout}>{props.children}</Container>
+      {props.children}
     </div>
   );
 }
