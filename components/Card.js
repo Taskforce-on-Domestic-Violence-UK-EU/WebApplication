@@ -16,17 +16,15 @@ const useStyles = makeStyles((theme) => ({
 
   card: {
     display: "flex",
-    minHeight: 500,
+    height: 400,
     justifyContent: "space-between",
-
-    height: "100%",
-    width: "80vw",
+    width: 500,
     "&:hover": {
       opacity: 0.8,
       cursor: "pointer",
     },
     padding: 0,
-    marginBottom: 30,
+    marginRight: 30,
     borderRadius: 10,
     boxShadow: "none",
   },
@@ -36,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-
     flexWrap: "wrap",
     padding: 0,
     margin: 0,
@@ -61,9 +58,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    width: "45%",
+    width: "100%",
     margin: 0,
     height: "100%",
+
     marginLeft: 50,
     marginTop: 50,
   },
@@ -72,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
     fontFamily: "Playfair Display, serif",
-    fontSize: "2.5vw",
+    fontSize: 20,
     textAlign: "left",
     fontWeight: 700,
     margin: 0,
@@ -146,7 +144,6 @@ const Preview = React.forwardRef(
     return (
       <a href={href} onClick={onClick} ref={ref} className={classes.wrapper}>
         <Card className={classes.card}>
-          {/* <CardContent className={classes.innerWrapper}> */}
           <div className={classes.content}>
             <div className={classes.details}>
               <h2 className={classes.author}>{article.author}</h2>
@@ -170,10 +167,6 @@ const Preview = React.forwardRef(
                 : null}
             </div>
           </div>
-          <div className={classes.imageContainer}>
-            <img className={classes.image} src={article.image} />
-          </div>
-          {/* </CardContent> */}
         </Card>
       </a>
     );

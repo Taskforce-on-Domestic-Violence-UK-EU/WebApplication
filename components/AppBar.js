@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState } from "react";
+
+// Material UI
+
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import SideDrawer from "./Drawer";
@@ -52,28 +54,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [anchor, setAnchor] = useState("left");
-  const [y, setY] = useState(0);
-  const [down, setDown] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    ref.current.addEventListener("onScroll", () => {
-      const currentY = window.scrollY;
-      const scrollingUp = yPos < lastYPos || yPos <= 0;
-
-      setShowComponent(scrollingUp);
-      setY(currentY);
-
-      console.log(scrollingUp);
-    });
-  }, [y]);
 
   return (
-    <div ref={ref} className={classes.root}>
+    <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <SideDrawer open={open} setOpen={setOpen} anchor={anchor} />
         <Toolbar className={classes.toolbar}>
@@ -87,7 +74,7 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Link href="/">
-            <a className={classes.logo}>To the Core</a>
+            <a className={classes.logo}>Task Force UK & EU</a>
           </Link>
         </Toolbar>
       </AppBar>

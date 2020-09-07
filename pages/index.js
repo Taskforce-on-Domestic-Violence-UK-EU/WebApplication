@@ -1,28 +1,36 @@
 import Head from "next/head";
+import Layout from "../components/Layout";
 import { Button } from "@material-ui/core";
+import HorizontalGrid from "../components/HorizontalGrid";
+import dbConnect from "../utils/dbConnect";
+import { getArticles } from "./api/articles/index";
 
-export default function Home() {
+export default function Home({ data }) {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
+        minWidth: "100vw",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        marginBottom: 45,
       }}
     >
       <Head>
         <title>Covid 19 Task Force on Domestic Violence UK & EU</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Layout />
       <h1
         style={{
           fontFamily: "Playfair Display, serif",
-          fontSize: 52,
+          fontSize: 36,
           width: "60%",
           textAlign: "left",
+          marginBottom: 15,
+          marginTop: 100,
         }}
       >
         Covid 19 Task Force on Domestic Violence UK & EU
@@ -35,24 +43,69 @@ export default function Home() {
           fontSize: 29,
           width: "60%",
           textAlign: "left",
+          margin: 0,
+          marginBottom: 30,
         }}
       >
-        Hello! We are currently developing our application. Things should be up
-        and running shortly. Current proposed release date is :
+        Welcome to the Task Force Directory.
         <br />
         <br />
-        <p
-          style={{
-            fontFamily: "Frank Ruhl Libre, serif",
-            fontWeight: 500,
-            fontSize: 32,
-            width: "60%",
-            textAlign: "left",
-          }}
-        >
-          October 1st, 2020.
-        </p>
       </p>
+      <header
+        style={{
+          fontFamily: "Frank Ruhl Libre, serif",
+          fontWeight: 500,
+          fontSize: 24,
+          width: "60%",
+          textAlign: "left",
+          marginBottom: 30,
+        }}
+      >
+        Organization Directory
+      </header>
+      <HorizontalGrid data={data} />
+      <header
+        style={{
+          fontFamily: "Frank Ruhl Libre, serif",
+          fontWeight: 500,
+          fontSize: 24,
+          width: "60%",
+          textAlign: "left",
+          marginBottom: 30,
+          marginTop: 45,
+        }}
+      >
+        Articles
+      </header>
+      <HorizontalGrid data={data} />
+      <header
+        style={{
+          fontFamily: "Frank Ruhl Libre, serif",
+          fontWeight: 500,
+          fontSize: 24,
+          width: "60%",
+          textAlign: "left",
+          marginBottom: 30,
+          marginTop: 45,
+        }}
+      >
+        Workshops
+      </header>
+      <HorizontalGrid data={data} />
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  await dbConnect();
+
+  const result = await getArticles();
+  const json_string = JSON.stringify(result);
+  const articles = JSON.parse(json_string);
+
+  return {
+    props: {
+      data: articles,
+    },
+  };
 }
