@@ -87,7 +87,7 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Link href="/">
-            <a className={classes.logo}>To the Core</a>
+            <a className={classes.logo}>Task Force UK & EU</a>
           </Link>
         </Toolbar>
       </AppBar>
