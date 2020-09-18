@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
-import { Button } from "@material-ui/core";
+import Link from "next/link";
 import HorizontalGrid from "../components/HorizontalGrid";
 import dbConnect from "../utils/dbConnect";
 import { getArticles } from "./api/articles/index";
@@ -55,18 +55,20 @@ export default function Home({ data }) {
         <br />
         <br />
       </p>
-      <header
-        style={{
-          fontFamily: "Frank Ruhl Libre, serif",
-          fontWeight: 500,
-          fontSize: 24,
-          width: "60%",
-          textAlign: "left",
-          marginBottom: 30,
-        }}
-      >
-        Organization Directory
-      </header>
+      <Link href="/organizations">
+        <header
+          style={{
+            fontFamily: "Frank Ruhl Libre, serif",
+            fontWeight: 500,
+            fontSize: 24,
+            width: "60%",
+            textAlign: "left",
+            marginBottom: 30,
+          }}
+        >
+          Organization Directory
+        </header>
+      </Link>
       <HorizontalGrid data={organizations} />
       <header
         style={{
