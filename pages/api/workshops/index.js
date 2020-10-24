@@ -14,7 +14,7 @@ export const createWorkshop = async () => {
     description:
       "Supporting survivors of domestic violence and the work of DV charities in the UK & EU",
     image:
-      "https://images.unsplash.com/photo-1507708346190-57ddfc63e830?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "https://cdn.dribbble.com/users/2893989/screenshots/13928032/media/9784cf82f0c941e95a08379155b860ef.png",
     tags: ["Social Justice", "Equality", "Journalism"],
     content: [],
   });

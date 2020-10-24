@@ -14,7 +14,7 @@ export const createArticle = async () => {
     description:
       "This is a new article, read it an you will have read a new article",
     image:
-      "https://images.unsplash.com/photo-1507708346190-57ddfc63e830?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "https://cdn.dribbble.com/users/2893989/screenshots/14113447/media/0e7f1e1af0b9354f272dee113bef150e.png",
     tags: ["Social Justice", "Equality", "Journalism"],
     content: [{ type: "text", content: "Hello, this is a new article" }],
   });
