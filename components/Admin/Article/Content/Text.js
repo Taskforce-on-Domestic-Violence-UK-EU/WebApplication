@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
   text: {
-    textDecoration: "none",
-    color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 300,
-    fontSize: 22,
-
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: 400,
+    fontSize: 24,
+    margin: 0,
+    marginTop: 45,
+    width: "100%",
     height: "100%",
     lineHeight: "32px",
   },

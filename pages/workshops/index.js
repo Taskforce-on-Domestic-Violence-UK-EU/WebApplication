@@ -1,13 +1,12 @@
 import Head from "next/head";
-import Layout from "../components/UI/Layout";
-import dbConnect from "../utils/dbConnect";
-import { getArticles } from "./api/articles/index";
-import { getWorkshops } from "./api/workshops/index";
-// import { getOrganizations } from "./api/organizations";
+import Layout from "../../components/UI/Layout";
+import dbConnect from "../../utils/dbConnect";
+import { getWorkshops } from "../api/workshops/index";
 
-import Main from "../components/Index/Core/Main";
+import Workshops from "../../components/Workshops/Core/Main";
+import Search from "../../components/UI/Search";
 
-export default function Home({ data }) {
+export default function Home({ workshops }) {
   return (
     <div
       style={{
@@ -16,17 +15,16 @@ export default function Home({ data }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
         marginBottom: 45,
         marginTop: 0,
       }}
     >
       <Head>
-        <title>Covid 19 Task Force on Domestic Violence UK & EU</title>
+        <title>Workshops</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Main data={data} />
+        <Workshops workshops={workshops} displaySearch={true} />
       </Layout>
     </div>
   );
@@ -46,13 +44,11 @@ export async function getServerSideProps() {
     }
   };
 
-  let articles = await retrieveData(getArticles);
   let workshops = await retrieveData(getWorkshops);
-  // let organizations = await retrieveData(getOrganizations);
 
   return {
     props: {
-      data: { articles, workshops },
+      workshops,
     },
   };
 }

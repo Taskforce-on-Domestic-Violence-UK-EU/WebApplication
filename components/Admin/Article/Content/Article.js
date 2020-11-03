@@ -1,14 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Chip from "@material-ui/core/Chip";
 import { useEffect, useContext } from "react";
 // Components
 import Item from "./Item";
 // Contexts
 import { AdminContext } from "../contexts/AdminContext";
-import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -39,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textDecoration: "none",
     color: "black",
-    fontFamily: "Playfair Display, serif",
+    fontFamily: "Open Sans, sans serif",
     fontSize: 52,
     textAlign: "left",
     width: "40%",
@@ -98,20 +95,20 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "32px",
   },
   author: {
-    color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 500,
-    fontSize: "14px",
-    width: "80%",
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: 400,
+    fontSize: 20,
     margin: 0,
+    marginTop: 15,
+    color: "black",
   },
   date: {
-    color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 500,
-    fontSize: "14px",
-    width: "80%",
-    marginTop: 10,
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: 400,
+    fontSize: 16,
+    margin: 0,
+    marginTop: 15,
+    color: "grey",
   },
   articleImage: {
     width: "100%",
@@ -167,37 +164,25 @@ function Article() {
         <h1 className={classes.title}>{title}</h1>
       </div>
       <div className={classes.article}>
-        <div className={classes.chipArray}>
-          {article.tags
-            ? article.tags.map((tag) => {
-                return (
-                  <Chip
-                    size="small"
-                    color="primary"
-                    label={tag}
-                    className={classes.chip}
-                    key={tag}
-                  />
-                );
-              })
-            : null}
-        </div>
         <div className={classes.innerWrapper}>
           <h2 className={classes.author}>{author}</h2>
           <h2 className={classes.date}>{date}</h2>
         </div>
 
         <div className={classes.body}>
-          <IconButton
-            onClick={() =>
-              setContent([
-                { type: "text", content: "This is a new paragraph" },
-                ...content,
-              ])
-            }
-          >
-            <AddCircleIcon />
-          </IconButton>
+          {content.length === 0 ? (
+            <IconButton
+              style={{ marginTop: 45 }}
+              onClick={() =>
+                setContent([
+                  { type: "text", content: "Here is your first line!" },
+                  ...content,
+                ])
+              }
+            >
+              <AddCircleIcon />
+            </IconButton>
+          ) : null}
           {content.map((item) => {
             let i = content.indexOf(item);
             return <Item key={i} item={item} />;

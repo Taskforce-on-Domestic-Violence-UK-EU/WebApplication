@@ -71,22 +71,19 @@ const Main = ({ data }) => {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.root}>
+      {/* <div className={classes.root}>
         <img className={classes.image} src={"/women.svg"} />
         <div className={classes.textWrapper}>
-          <header className={classes.header}>
-            Create Change For Survivors.
-          </header>
+          <header className={classes.header}>We're Here to Help.</header>
           <p className={classes.text}>
-            We are a group of students and activists from the UK and EU
-            passionate about helping those affected by domestic violence during
-            the COVID-19 pandemic.
+            We are passionate about helping those affected by domestic violence
+            during.
           </p>
           <Button variant="contained" className={classes.button}>
             Learn More
           </Button>
         </div>
-      </div>
+      </div> */}
       <Workshops workshops={workshops} />
       <Research articles={articles} />
     </div>

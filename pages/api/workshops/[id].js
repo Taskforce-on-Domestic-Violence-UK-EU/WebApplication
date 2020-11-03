@@ -1,5 +1,6 @@
 import dbConnect from "../../../utils/dbConnect";
-import Article from "../../../models/article";
+import Workshop from "../../../models/workshop";
+import { getWorkshops } from ".";
 
 const createKeys = async (body) => {
   const dictionary = {};
@@ -9,20 +10,20 @@ const createKeys = async (body) => {
   return dictionary;
 };
 
-export const getArticle = async (id) => {
-  const article = await Article.findById(id);
-  return article;
+export const getWorkshop = async (id) => {
+  const workshop = await Workshop.findById(id);
+  return workshop;
 };
 
-export const updateArticle = async (id, body) => {
-  const article = await Article.findByIdAndUpdate(
+export const updateWorkshop = async (id, body) => {
+  const workshop = await Workshop.findByIdAndUpdate(
     { _id: id },
     await createKeys(body),
     {
       new: true,
     }
   );
-  return article;
+  return workshop;
 };
 
 export default async (req, res) => {
@@ -38,10 +39,10 @@ export default async (req, res) => {
     case "PUT":
       if (method === "PUT") {
         try {
-          const article = await updateArticle(id, body);
+          const workshop = await updateArticle(id, body);
           res.status(200).json({
             status: "success",
-            data: article,
+            data: workshop,
           });
         } catch (error) {
           res.status(500).json({
@@ -54,8 +55,8 @@ export default async (req, res) => {
 
     case "GET":
       try {
-        const article = await getArticle(id);
-        res.status(200).json({ status: "success", data: article });
+        const workshop = await getWorkshop(id);
+        res.status(200).json({ status: "success", data: workshop });
       } catch (error) {
         res.status(400).json({ status: "error", message: error.message });
       }
@@ -63,7 +64,7 @@ export default async (req, res) => {
 
     case "DELETE":
       try {
-        await Article.deleteOne({ _id: id });
+        await Workshop.deleteOne({ _id: id });
         res.status(200).json({ status: "success", data: null });
       } catch (error) {
         res.status(400).json({ status: "error", message: error.message });

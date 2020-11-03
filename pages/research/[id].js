@@ -1,14 +1,14 @@
 import Head from "next/head";
-import Layout from "../../components/Layout";
-import Main from "../../components/Article";
+import Layout from "../../components/UI/Layout";
+import Main from "../../components/Research/Article/Main";
 import Article from "../../models/article";
-import MobileArticle from "../../components/MobileArticle";
-import useWitdh from "../../hooks/useWidth";
+import MobileArticle from "../../components/Research/Article/MobileArticle";
+import useWidth from "../../hooks/useWidth";
 import { useEffect } from "react";
 import dbConnect from "../../utils/dbConnect";
 
 export default function Page({ article }) {
-  const { width, setWidth } = useWitdh();
+  const { width, setWidth } = useWidth();
 
   useEffect(() => {
     setWidth(window.innerWidth);

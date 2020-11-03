@@ -1,7 +1,6 @@
 import Head from "next/head";
-import Layout from "../../components/Layout";
+import Layout from "../../components/UI/Layout";
 import Main from "../../components/Admin/Article/Core/Main";
-import MobileArticle from "../../components/MobileArticle";
 import useWitdh from "../../hooks/useWidth";
 import { useEffect } from "react";
 import { getArticle } from "../api/articles/[id]";

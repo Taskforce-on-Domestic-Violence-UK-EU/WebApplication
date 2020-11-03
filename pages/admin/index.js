@@ -1,10 +1,8 @@
 import Head from "next/head";
-import Layout from "../../components/Layout";
-import Card from "../../components/Card";
-import SmallCard from "../../components/SmallCard";
 import Main from "../../components/Admin/Overview/Core/Main";
 import dbConnect from "../../utils/dbConnect";
 import { getArticles } from "../api/articles/index";
+import { getWorkshops } from "../api/workshops/index";
 
 export default function Home({ data }) {
   return (
@@ -21,13 +19,24 @@ export default function Home({ data }) {
 export async function getServerSideProps() {
   await dbConnect();
 
-  const result = await getArticles();
-  const json_string = JSON.stringify(result);
-  const articles = JSON.parse(json_string);
+  const retrieveData = async (callback) => {
+    if (callback) {
+      const result = await callback();
+      const json_string = JSON.stringify(result);
+      const data = JSON.parse(json_string);
+      return data;
+    } else {
+      throw new Error("No Callback Was Given");
+    }
+  };
+
+  let articles = await retrieveData(getArticles);
+  let workshops = await retrieveData(getWorkshops);
+  // let organizations = await retrieveData(getOrganizations);
 
   return {
     props: {
-      data: articles,
+      data: { articles, workshops },
     },
   };
 }

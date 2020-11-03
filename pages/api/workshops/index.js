@@ -17,16 +17,14 @@ export const createWorkshop = async () => {
       "https://cdn.dribbble.com/users/2893989/screenshots/13928032/media/9784cf82f0c941e95a08379155b860ef.png",
     tags: ["Social Justice", "Equality", "Journalism"],
     content: [],
+    articles: [],
+    organizations: [],
   });
   return workshop;
 };
 
 export default async (req, res) => {
-  const {
-    query: { id },
-    method,
-    body,
-  } = req;
+  const { method, body } = req;
 
   await dbConnect();
 

@@ -13,6 +13,8 @@ const WorkshopSchema = new mongoose.Schema({
   description: { type: String },
   image: { type: String },
   tags: { type: [] },
+  articles: { type: [] },
+  organizations: { type: [] },
 });
 
 export default mongoose.models.Workshop ||

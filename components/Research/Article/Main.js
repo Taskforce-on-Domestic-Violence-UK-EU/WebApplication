@@ -1,8 +1,6 @@
-import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import KeyPoint from "./Key";
-import Chip from "@material-ui/core/Chip";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textDecoration: "none",
     color: "black",
-    fontFamily: "Playfair Display, serif",
+    fontFamily: "Open Sans, sans serif",
     fontSize: 52,
     textAlign: "left",
     width: "40%",
@@ -71,20 +69,20 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
   },
   text: {
-    textDecoration: "none",
-    color: "black",
     fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 300,
+    fontWeight: 400,
     fontSize: 22,
+    margin: 0,
+    marginTop: 45,
     width: "100%",
     height: "100%",
-    lineHeight: "32px",
+    lineHeight: 1.6,
   },
 
   subheader: {
     textDecoration: "none",
     color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
+    fontFamily: "Open Sans, sans serif",
     fontWeight: 700,
     fontSize: 20,
     width: "100%",
@@ -92,20 +90,20 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "32px",
   },
   author: {
-    color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 500,
-    fontSize: "14px",
-    width: "80%",
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: 400,
+    fontSize: 20,
     margin: 0,
+    marginTop: 15,
+    color: "black",
   },
   date: {
-    color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 500,
-    fontSize: "14px",
-    width: "80%",
-    marginTop: 10,
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: 400,
+    fontSize: 16,
+    margin: 0,
+    marginTop: 15,
+    color: "grey",
   },
   articleImage: {
     width: "100%",
@@ -118,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 15,
     paddingLeft: 5,
     paddingRight: 5,
-    fontFamily: "Frank Ruhl Libre, serif",
+    fontFamily: "Open Sans, sans serif",
     fontWeight: 700,
     fontSize: 13,
     backgroundColor: "#E5E5E5",
@@ -149,7 +147,7 @@ function Article({ article }) {
         </h1>
       </div>
       <div className={classes.article}>
-        <div className={classes.chipArray}>
+        {/* <div className={classes.chipArray}>
           {article.tags.map((tag) => {
             return (
               <Chip
@@ -161,7 +159,7 @@ function Article({ article }) {
               />
             );
           })}
-        </div>
+        </div> */}
         <div className={classes.innerWrapper}>
           <h2 className={classes.author}>{article.author}</h2>
           <h2 className={classes.date}>{article.date}</h2>

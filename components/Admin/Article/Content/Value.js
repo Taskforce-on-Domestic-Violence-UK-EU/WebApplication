@@ -13,13 +13,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   text: {
-    textDecoration: "none",
-    color: "black",
     fontFamily: "Frank Ruhl Libre, serif",
-    fontWeight: 300,
+    fontWeight: 400,
     fontSize: 22,
+    margin: 0,
+    marginTop: 45,
+    width: "100%",
     height: "100%",
-    lineHeight: "32px",
+    lineHeight: 1.6,
   },
   header: {
     textDecoration: "none",
