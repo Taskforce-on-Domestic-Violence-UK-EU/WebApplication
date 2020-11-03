@@ -84,10 +84,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ article, admin = false }) => {
+const Main = ({ workshop, admin }) => {
   const classes = useStyles();
 
-  const { _id, title, author, image, date, description } = article;
+  const { _id, title, image, date, description } = workshop;
 
   const format = (text) => {
     const words = text.split(" ");
@@ -112,16 +112,11 @@ const Main = ({ article, admin = false }) => {
     <div className={classes.root}>
       <div className={classes.textWrapper}>
         <header className={classes.header}>{title}</header>
-        {/* <p className={classes.date}>{date}</p> */}
-        <p className={classes.date}>{author}</p>
+        <p className={classes.date}>{date}</p>
         <p className={classes.text}>{format(description)}</p>
       </div>
       <div className={classes.actionWrapper}>
-        <a
-          className={classes.button}
-          href={`/${admin ? "admin" : ""}/articles/${_id}`}
-          // href={`/admin/articles/${_id}`}
-        >
+        <a className={classes.button} href={`/workshops/${_id}`}>
           View
         </a>
 

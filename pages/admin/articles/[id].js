@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Layout from "../../components/UI/Layout";
-import Main from "../../components/Admin/Article/Core/Main";
-import useWitdh from "../../hooks/useWidth";
+import Layout from "../../../components/UI/Layout";
+import Main from "../../../components/Admin/Article/Core/Main";
+import useWitdh from "../../../hooks/useWidth";
 import { useEffect } from "react";
-import { getArticle } from "../api/articles/[id]";
-import dbConnect from "../../utils/dbConnect";
+import { getArticle } from "../../api/articles/[id]";
+import dbConnect from "../../../utils/dbConnect";
 
 export default function Page({ article }) {
   const { width, setWidth } = useWitdh();

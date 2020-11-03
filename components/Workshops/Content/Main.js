@@ -118,7 +118,7 @@ const Main = ({ workshop, admin }) => {
       <div className={classes.actionWrapper}>
         <a
           className={classes.button}
-          href={`/${admin ? "admin" : "workshops"}/${_id}`}
+          href={`/${admin ? "admin" : ""}/workshops/${_id}`}
         >
           View
         </a>
