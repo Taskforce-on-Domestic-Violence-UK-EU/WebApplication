@@ -45,6 +45,8 @@ const Main = ({ workshops, displaySearch = false, admin = false }) => {
   const [results, setResults] = useState(workshops);
   const type = "workshops";
 
+  const reset = () => setResults(workshops);
+
   useEffect(() => {}, [workshops, results]);
 
   return (
@@ -53,7 +55,12 @@ const Main = ({ workshops, displaySearch = false, admin = false }) => {
         <a className={classes.header}>Workshops</a>
       </Link>
       {displaySearch ? (
-        <Search results={results} setResults={setResults} type={type} />
+        <Search
+          results={results}
+          setResults={setResults}
+          type={type}
+          reset={reset}
+        />
       ) : null}
       <ul className={classes.wrapper}>
         {results.map((workshop) => {

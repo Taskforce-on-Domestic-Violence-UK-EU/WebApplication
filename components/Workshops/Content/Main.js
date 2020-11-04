@@ -108,6 +108,15 @@ const Main = ({ workshop, admin }) => {
     }
   };
 
+  const determineLink = (admin) => {
+    let link = `/workshops/${_id}`;
+
+    if (admin) {
+      link = "/admin" + link;
+    }
+    return link;
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.textWrapper}>
@@ -116,10 +125,7 @@ const Main = ({ workshop, admin }) => {
         <p className={classes.text}>{format(description)}</p>
       </div>
       <div className={classes.actionWrapper}>
-        <a
-          className={classes.button}
-          href={`/${admin ? "admin" : ""}/workshops/${_id}`}
-        >
+        <a className={classes.button} href={determineLink(admin)}>
           View
         </a>
 

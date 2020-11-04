@@ -1,6 +1,7 @@
 import { useState } from "react";
 // Components
 import AppBar from "./AppBar";
+import Footer from "./Footer";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -20,6 +21,7 @@ function Layout(props) {
     <div className={classes.wrapper}>
       <AppBar />
       {props.children}
+      <Footer />
     </div>
   );
 }

@@ -45,13 +45,12 @@ const Main = ({ articles, displaySearch = false, admin = false }) => {
   const [results, setResults] = useState(articles);
   const type = "research";
 
-  useEffect(() => {
-    console.log(articles);
-  }, [results]);
+  const reset = () => setResults(articles);
+
+  useEffect(() => {}, [results]);
 
   useEffect(() => {
     setResults(articles);
-    console.log(articles);
   }, [articles]);
 
   return (
@@ -60,7 +59,12 @@ const Main = ({ articles, displaySearch = false, admin = false }) => {
         <a className={classes.header}>Research</a>
       </Link>
       {displaySearch ? (
-        <Search results={results} setResults={setResults} type={type} />
+        <Search
+          results={results}
+          setResults={setResults}
+          type={type}
+          reset={reset}
+        />
       ) : null}
       <div className={classes.wrapper}>
         {results.map((article) => {

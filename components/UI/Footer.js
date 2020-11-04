@@ -1,0 +1,40 @@
+import React, { useState } from "react";
+
+// Material UI
+
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+
+// Components
+
+import Menu from "./Menu";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: "100vw",
+    height: 150,
+    borderTop: "1px solid #e3dddc",
+  },
+  appBar: {
+    boxShadow: "none",
+    width: "100vw",
+    flexGrow: 1,
+    position: "fixed",
+
+    height: 75,
+  },
+  toolbar: {
+    display: "flex",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
+
+export default function Footer({}) {
+  const classes = useStyles();
+
+  return <div className={classes.root}></div>;
+}

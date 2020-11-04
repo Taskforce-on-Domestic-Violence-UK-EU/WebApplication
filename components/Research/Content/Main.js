@@ -108,6 +108,14 @@ const Main = ({ article, admin = false }) => {
     }
   };
 
+  const determineLink = (admin) => {
+    if (admin) {
+      return `/admin/articles/${_id}`;
+    } else {
+      return `/research/${_id}`;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.textWrapper}>
@@ -119,7 +127,7 @@ const Main = ({ article, admin = false }) => {
       <div className={classes.actionWrapper}>
         <a
           className={classes.button}
-          href={`/${admin ? "admin" : ""}/articles/${_id}`}
+          href={determineLink(admin)}
           // href={`/admin/articles/${_id}`}
         >
           View

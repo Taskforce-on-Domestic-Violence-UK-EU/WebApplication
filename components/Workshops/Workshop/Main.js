@@ -113,7 +113,7 @@ const Main = ({ workshop }) => {
           Make Reservation
         </a>
       </div>
-      <Research articles={articles} />
+      {articles.length > 0 ? <Research articles={articles} /> : null}
     </div>
   );
 };

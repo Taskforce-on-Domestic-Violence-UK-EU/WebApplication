@@ -70,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     width: "100%",
     height: "100%",
-    margin: 0,
-    marginTop: "10px",
+    marginBottom: 25,
+    marginTop: 10,
   },
   text: {
     textDecoration: "none",

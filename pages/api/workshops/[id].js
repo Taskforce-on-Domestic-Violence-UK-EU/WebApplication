@@ -1,6 +1,5 @@
 import dbConnect from "../../../utils/dbConnect";
 import Workshop from "../../../models/workshop";
-import { getWorkshops } from ".";
 
 const createKeys = async (body) => {
   const dictionary = {};
@@ -39,7 +38,7 @@ export default async (req, res) => {
     case "PUT":
       if (method === "PUT") {
         try {
-          const workshop = await updateArticle(id, body);
+          const workshop = await updateWorkshop(id, body);
           res.status(200).json({
             status: "success",
             data: workshop,

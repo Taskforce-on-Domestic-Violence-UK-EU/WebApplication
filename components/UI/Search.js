@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search({ setResults, type }) {
+export default function Search({ setResults, type, reset = () => {} }) {
   const classes = useStyles();
   const [search, setSearch] = useState("");
 
@@ -44,6 +44,15 @@ export default function Search({ setResults, type }) {
       setResults(data);
     }
   };
+
+  const handleChange = (e) => {
+    let text = e.target.value;
+    setSearch(text);
+  };
+
+  useEffect(() => {
+    search.length === 0 ? reset() : () => {};
+  }, [search]);
 
   return (
     <form
@@ -61,7 +70,7 @@ export default function Search({ setResults, type }) {
       </IconButton>
       <TextField
         className={classes.search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => handleChange(e)}
         id="filled-basic"
         fullWidth={true}
         value={search}

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     fontSize: 22,
     margin: 0,
-    marginTop: 45,
+    marginBottom: 35,
     width: "100%",
     height: "100%",
     lineHeight: 1.6,
@@ -25,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
   header: {
     textDecoration: "none",
     color: "black",
-    fontFamily: "Frank Ruhl Libre, serif",
+    fontFamily: "Open Sans, sans serif",
     fontWeight: 700,
-    fontSize: 20,
+    fontSize: 19,
+    width: "100%",
     height: "100%",
-    lineHeight: "32px",
+
+    margin: 0,
+    marginBottom: 20,
   },
   imageContainer: {
     display: "flex",
