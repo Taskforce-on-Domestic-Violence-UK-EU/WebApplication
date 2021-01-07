@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Layout from "../../components/UI/Layout";
-import dbConnect from "../../utils/dbConnect";
-import { getWorkshops } from "../api/workshops/index";
+// import dbConnect from "../../utils/dbConnect";
+// import { getWorkshops } from "../api/workshops/index";
+
+import retrieveData from "../../utils/retrieveData";
 
 import Workshops from "../../components/Workshops/Core/Main";
 import Search from "../../components/UI/Search";
@@ -30,21 +32,11 @@ export default function Home({ workshops }) {
   );
 }
 
-export async function getServerSideProps() {
-  await dbConnect();
+export async function getStaticProps() {
+  const res = await fetch("https://taskforce-cms.vercel.app/api/workshops");
+  const result = await res.json();
 
-  const retrieveData = async (callback) => {
-    if (callback) {
-      const result = await callback();
-      const json_string = JSON.stringify(result);
-      const data = JSON.parse(json_string);
-      return data;
-    } else {
-      throw new Error("No Callback Was Given");
-    }
-  };
-
-  let workshops = await retrieveData(getWorkshops);
+  const workshops = result.data;
 
   return {
     props: {
@@ -52,3 +44,26 @@ export async function getServerSideProps() {
     },
   };
 }
+
+// export async function getServerSideProps() {
+//   await dbConnect();
+
+//   const retrieveData = async (callback) => {
+//     if (callback) {
+//       const result = await callback();
+//       const json_string = JSON.stringify(result);
+//       const data = JSON.parse(json_string);
+//       return data;
+//     } else {
+//       throw new Error("No Callback Was Given");
+//     }
+//   };
+
+//   let workshops = await retrieveData(getWorkshops);
+
+//   return {
+//     props: {
+//       workshops,
+//     },
+//   };
+// }
