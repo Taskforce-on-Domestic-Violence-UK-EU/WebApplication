@@ -20,13 +20,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100vw",
     flexGrow: 1,
     position: "fixed",
-
     height: 75,
   },
   toolbar: {
     display: "flex",
     height: "100%",
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
   },
 }));

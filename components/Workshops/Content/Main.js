@@ -17,12 +17,13 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
     backgroundColor: "white",
-    minHeight: 350,
-    boxShadow: "11px 12px 24px -1px rgba(74,74,74,0.31)",
-    borderRadius: 15,
-    padding: 50,
+    // boxShadow: "11px 12px 24px -1px rgba(74,74,74,0.15)",
+    borderRadius: 4,
+    // padding: 50,
     width: "75vw",
+    maxWidth: 700,
     marginBottom: 75,
+    marginTop: 0,
   },
   textWrapper: {
     display: "flex",
@@ -35,26 +36,26 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 25,
+    marginTop: 45,
   },
   header: {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 700,
-    fontSize: 25,
+    fontFamily: "Playfair Display, serif",
+    fontWeight: 500,
+    fontSize: 45,
     marginTop: 0,
     width: "90%",
   },
   text: {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 400,
+    fontFamily: "Nunito Sans, sans-serif",
+    fontWeight: 500,
     fontSize: 18,
     margin: 0,
     marginTop: 15,
   },
   date: {
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 15,
+    fontSize: 17,
     margin: 0,
     marginTop: 15,
     color: "grey",
@@ -66,16 +67,16 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 50,
   },
   button: {
-    borderRadius: 5,
+    borderRadius: 2,
     textDecoration: "none",
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 700,
     fontSize: 16,
     textAlign: "center",
     textTransform: "none",
     width: 140,
 
-    backgroundColor: "rgb(97, 183, 232)",
+    backgroundColor: "black",
     color: "white",
     padding: 9.5,
     "&:hover": {
@@ -126,10 +127,10 @@ const Main = ({ workshop, admin }) => {
       </div>
       <div className={classes.actionWrapper}>
         <a className={classes.button} href={determineLink(admin)}>
-          View
+          Attend
         </a>
 
-        <img className={classes.image} src={image} />
+        {/* <img className={classes.image} src={image} /> */}
       </div>
     </div>
   );

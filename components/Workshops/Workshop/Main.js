@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 50,
   },
   header: {
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Playfair Display, serif",
     fontWeight: 700,
     fontSize: 50,
     width: "100%",

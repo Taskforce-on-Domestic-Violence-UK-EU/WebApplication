@@ -20,32 +20,32 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "rgb(140,179,166)",
-    padding: 50,
-    width: "100%",
+    // backgroundColor: "#E3A8A8",
+    marginTop: 50,
+    width: "75vw",
   },
   textWrapper: {
     display: "flex",
     flexDirection: "column",
 
-    width: "40%",
+    width: "60%",
     height: "100%",
   },
   header: {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 700,
-    fontSize: 50,
-    color: "white",
+    fontFamily: "Playfair Display, serif",
+    fontWeight: 500,
+    fontSize: 65,
+    color: "black",
 
     width: "100%",
   },
   text: {
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 18,
-    color: "white",
+    fontSize: 22,
+    color: "black",
   },
   image: {
     width: 375,
@@ -71,19 +71,18 @@ const Main = ({ data }) => {
 
   return (
     <div className={classes.wrapper}>
-      {/* <div className={classes.root}>
-        <img className={classes.image} src={"/women.svg"} />
+      <div className={classes.root}>
+        {/* <img className={classes.image} src={"/sisters.webp"} /> */}
         <div className={classes.textWrapper}>
-          <header className={classes.header}>We're Here to Help.</header>
+          <header className={classes.header}>We're Here For You</header>
           <p className={classes.text}>
-            We are passionate about helping those affected by domestic violence
-            during.
+            Covid-19 Task Force on Domestic Violence
           </p>
-          <Button variant="contained" className={classes.button}>
+          {/* <Button variant="contained" className={classes.button}>
             Learn More
-          </Button>
+          </Button> */}
         </div>
-      </div> */}
+      </div>
       <Workshops workshops={workshops} />
       <Research articles={articles} />
     </div>

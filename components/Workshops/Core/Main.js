@@ -19,24 +19,29 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 50,
   },
   header: {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 700,
-    fontSize: 50,
+    fontFamily: "Nunito Sans, sans-serif",
+    fontWeight: 500,
+    fontSize: 30,
     width: "100%",
-    marginBottom: 45,
+    marginBottom: 80,
+    textAlign: "right",
     color: "black",
     textDecoration: "none",
     "&:hover": {
       opacity: 0.5,
     },
+    borderBottom: "1px solid #D9D9D9",
+    paddingBottom: 10,
   },
+
   wrapper: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "100%",
     listStyle: "none",
-    paddingLeft: 0,
+    padding: 0,
+    margin: 0,
   },
 }));
 
@@ -52,7 +57,7 @@ const Main = ({ workshops, displaySearch = false, admin = false }) => {
   return (
     <div className={classes.root}>
       <Link href={"/workshops"}>
-        <a className={classes.header}>Workshops</a>
+        <a className={classes.header}>Upcoming Workshops</a>
       </Link>
       {displaySearch ? (
         <Search

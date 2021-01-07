@@ -16,19 +16,22 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     width: "75%",
-    paddingTop: 50,
+    paddingTop: 80,
   },
   header: {
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 700,
-    fontSize: 50,
+    fontFamily: "Nunito Sans, sans-serif",
+    fontWeight: 500,
+    fontSize: 30,
     width: "100%",
-    marginBottom: 45,
+    marginBottom: 80,
+    textAlign: "right",
     color: "black",
     textDecoration: "none",
     "&:hover": {
       opacity: 0.5,
     },
+    borderBottom: "1px solid #D9D9D9",
+    paddingBottom: 10,
   },
   wrapper: {
     display: "flex",
@@ -37,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     listStyle: "none",
     paddingLeft: 0,
+    margin: 0,
   },
 }));
 

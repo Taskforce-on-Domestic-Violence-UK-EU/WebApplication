@@ -7,15 +7,16 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     width: "50%",
+    maxWidth: 400,
   },
   link: {
     textDecoration: "none",
     color: "black",
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 700,
-    fontSize: 14,
+    fontFamily: "Nunito Sans, sans-serif",
+    fontWeight: 400,
+    fontSize: 15,
     "&:hover": {
       opacity: 0.4,
     },
