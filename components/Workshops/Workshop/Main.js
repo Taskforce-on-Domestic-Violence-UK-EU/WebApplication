@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontFamily: "Playfair Display, serif",
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: 50,
     width: "100%",
     marginBottom: 15,
@@ -44,31 +44,33 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   text: {
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 20,
+    fontSize: 22,
     margin: 0,
     marginTop: 10,
+    width: "90%",
+    maxWidth: 800,
   },
   date: {
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 10,
     color: "grey",
   },
 
   button: {
-    borderRadius: 5,
+    borderRadius: 2,
     textDecoration: "none",
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 700,
     fontSize: 18,
     textAlign: "center",
     textTransform: "none",
     width: 250,
     marginTop: 35,
-    backgroundColor: "rgb(97, 183, 232)",
+    backgroundColor: "black",
     color: "white",
     padding: 17.5,
     "&:hover": {
@@ -77,30 +79,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ workshop }) => {
+const Main = ({ workshop, articles = [] }) => {
   const classes = useStyles();
   const { title, date, description } = workshop;
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
 
-  const fetchArticle = async (id) => {
-    const req = await fetch(`/api/articles/${id}`);
-    const res = await req.json();
-    const data = res.data;
-    return data;
-  };
+  // const fetchArticle = async (id) => {
+  //   const req = await fetch(
+  //     `https://taskforce-cms.vercel.app/api/articles/${id}`
+  //   );
+  //   const res = await req.json();
+  //   const data = res.data;
+  //   return data;
+  // };
 
-  const fetchArticles = async () => {
-    let batch = [];
+  // const fetchArticles = async () => {
+  //   let batch = [];
 
-    for (var id of workshop.articles) {
-      var article = await fetchArticle(id);
-      batch.push(article);
-    }
-    setArticles(batch);
-  };
+  //   for (var id of workshop.articles) {
+  //     console.log(id);
+  //     var article = await fetchArticle(id);
+  //     batch.push(article);
+  //   }
+  //   setArticles(batch);
+  // };
 
   useEffect(() => {
-    fetchArticles();
+    // fetchArticles();
   }, []);
 
   return (

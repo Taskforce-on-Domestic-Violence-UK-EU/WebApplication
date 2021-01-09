@@ -5,7 +5,7 @@ import Layout from "../../components/UI/Layout";
 
 import Workshop from "../../components/Workshops/Workshop/Main";
 
-export default function Home({ workshop }) {
+export default function Home({ workshop, articles }) {
   return (
     <div
       style={{
@@ -23,7 +23,7 @@ export default function Home({ workshop }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Workshop workshop={workshop} />
+        <Workshop workshop={workshop} articles={articles} />
       </Layout>
     </div>
   );
@@ -45,6 +45,26 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
+const fetchArticle = async (id) => {
+  const req = await fetch(
+    `https://taskforce-cms.vercel.app/api/articles/${id}`
+  );
+  const res = await req.json();
+  const data = res.data;
+  return data;
+};
+
+const fetchArticles = async (workshop) => {
+  let batch = [];
+
+  for (var id of workshop.articles) {
+    console.log(id);
+    var article = await fetchArticle(id);
+    batch.push(article);
+  }
+  return batch;
+};
+
 export async function getStaticProps(context) {
   const params = context.params;
   const res = await fetch(
@@ -53,10 +73,12 @@ export async function getStaticProps(context) {
   const result = await res.json();
 
   const workshop = result.data;
+  const articles = await fetchArticles(workshop);
 
   return {
     props: {
       workshop,
+      articles,
     },
   };
 }

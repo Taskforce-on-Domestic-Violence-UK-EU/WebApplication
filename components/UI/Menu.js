@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: "flex",
     justifyContent: "space-between",
-    width: "50%",
+    width: 300,
     maxWidth: 400,
   },
   link: {
@@ -43,11 +43,11 @@ const SimpleMenu = () => {
           <a className={classes.link}>Research</a>
         </Link>
       </li>
-      <li style={{ listStyle: "none" }}>
+      {/* <li style={{ listStyle: "none" }}>
         <Link href={"/admin"}>
           <a className={classes.link}>Contribute</a>
         </Link>
-      </li>
+      </li> */}
     </ul>
   );
 };

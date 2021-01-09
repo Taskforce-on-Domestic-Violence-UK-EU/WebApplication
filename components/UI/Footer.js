@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   header: {
     fontFamily: "Nunito Sans, sans serif",
     fontWeight: 500,
-    fontSize: 20,
-    width: 300,
+    fontSize: 18,
+    width: 250,
     color: "black",
     marginBottom: 10,
-    marginRight: "10%",
+    marginRight: 30,
   },
   list: {
     display: "flex",
@@ -73,7 +73,7 @@ export default function Footer({}) {
         </header>
         <ul className={classes.list}>
           <li>
-            <header className={classes.listHeader}>Company</header>
+            <header className={classes.listHeader}>Contact</header>
           </li>
           <li className={classes.linkWrapper}>
             <a
@@ -81,7 +81,7 @@ export default function Footer({}) {
               href={"https://www.instagram.com/covid19dvtaskforceukeu/"}
               target="_blank"
             >
-              Sign up
+              hello@taskforceuk.com
             </a>
           </li>
         </ul>

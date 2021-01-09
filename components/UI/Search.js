@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { IconButton, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
+import useSWR from "swr";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -13,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
     alignItems: "center",
     padding: 11,
-    marginBottom: 50,
+    marginBottom: 90,
     "&:hover": {
       backgroundColor: "rgb(238, 240, 240)",
     },
@@ -38,9 +40,12 @@ export default function Search({ setResults, type, reset = () => {} }) {
 
   const preformSearch = async (keyword, type) => {
     if (keyword.length > 0) {
-      const req = await fetch(`/api/search/${type}/${keyword}`);
+      const req = await fetch(
+        `https://taskforce-cms.vercel.app/api/search/${type}/${keyword}`
+      );
+
       const res = await req.json();
-      const data = res.data;
+      const data = res.status === "success" ? res.data : [];
       setResults(data);
     }
   };
