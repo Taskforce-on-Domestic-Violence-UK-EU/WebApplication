@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     height: "100%",
-    // justifyContent: "center",
+    justifyContent: "center",
     alignItems: "center",
   },
 }));

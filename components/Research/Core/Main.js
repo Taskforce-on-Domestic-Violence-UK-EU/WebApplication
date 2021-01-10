@@ -69,6 +69,7 @@ const Main = ({
       </Link>
       {displaySearch ? (
         <Search
+          data={articles}
           results={results}
           setResults={setResults}
           type={type}

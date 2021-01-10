@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-
-import useSWR from "swr";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,11 +20,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  icon: {
+  searchIcon: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 12,
+  },
+
+  clearIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    // marginRight: 12,
   },
 
   search: {
@@ -34,19 +40,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search({ setResults, type, reset = () => {} }) {
+export default function Search({
+  data = [],
+  setResults,
+  type,
+  reset = () => {},
+}) {
   const classes = useStyles();
   const [search, setSearch] = useState("");
 
+  // const preformSearch = async (keyword, type) => {
+  //   if (keyword.length > 0) {
+  //     const req = await fetch(
+  //       `https://taskforce-cms.vercel.app/api/search/${type}/${keyword}`
+  //     );
+
+  //     const res = await req.json();
+  //     const data = res.status === "success" ? res.data : [];
+  //     setResults(data);
+  //   }
+  // };
+
+  const searchData = (list, value, attribute) => {
+    return list.filter((item) => item[attribute].toLowerCase().includes(value));
+  };
+
   const preformSearch = async (keyword, type) => {
     if (keyword.length > 0) {
-      const req = await fetch(
-        `https://taskforce-cms.vercel.app/api/search/${type}/${keyword}`
-      );
-
-      const res = await req.json();
-      const data = res.status === "success" ? res.data : [];
-      setResults(data);
+      const filtered_data = searchData(data, keyword, "title");
+      setResults(filtered_data);
     }
   };
 
@@ -69,7 +91,7 @@ export default function Search({ setResults, type, reset = () => {} }) {
     >
       <IconButton
         onClick={() => preformSearch(search, type)}
-        className={classes.icon}
+        className={classes.serachIcon}
       >
         <SearchIcon />
       </IconButton>
@@ -81,6 +103,11 @@ export default function Search({ setResults, type, reset = () => {} }) {
         value={search}
         InputProps={{ disableUnderline: true }}
       />
+      {search.length !== 0 ? (
+        <IconButton onClick={() => setSearch("")} className={classes.clearIcon}>
+          <ClearIcon />
+        </IconButton>
+      ) : null}
     </form>
   );
 }

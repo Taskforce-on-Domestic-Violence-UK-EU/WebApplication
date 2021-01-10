@@ -7,8 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // Components
 
-import Workshop from "../Content/Main";
-import Search from "../../UI/Search";
+import Article from "../Content/Main";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,50 +32,32 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid #D9D9D9",
     paddingBottom: 10,
   },
-
   wrapper: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "100%",
     listStyle: "none",
-    padding: 0,
+    paddingLeft: 0,
     margin: 0,
   },
 }));
 
-const Main = ({ workshops, displaySearch = false, admin = false }) => {
+const Main = ({ team, admin = false }) => {
   const classes = useStyles();
-  const [results, setResults] = useState(workshops);
-  const type = "workshops";
-
-  const reset = () => setResults(workshops);
-
-  useEffect(() => {}, [workshops, results]);
 
   return (
     <div className={classes.root}>
-      <Link href={"/workshops"}>
-        <a className={classes.header}>Upcoming Workshops</a>
+      <Link href={"/team"}>
+        <a className={classes.header}>Team</a>
       </Link>
-      {displaySearch ? (
-        <Search
-          data={workshops}
-          results={results}
-          setResults={setResults}
-          type={type}
-          reset={reset}
-        />
-      ) : null}
-      <ul className={classes.wrapper}>
-        {results.map((workshop) => {
-          return (
-            <li key={workshop._id}>
-              <Workshop workshop={workshop} admin={admin} />
-            </li>
-          );
+      <div className={classes.wrapper}>
+        {team.map((person) => {
+          if (person) {
+            return <Article admin={admin} key={person.name} person={person} />;
+          }
         })}
-      </ul>
+      </div>
     </div>
   );
 };
