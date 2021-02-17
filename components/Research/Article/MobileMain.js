@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     width: "100vw",
     backgroundColor: "white",
-    marginTop: 125,
+    marginTop: 85,
   },
 
   body: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     fontFamily: "Playfair Display, serif",
     fontWeight: 500,
-    fontSize: 52,
+    fontSize: 35,
     textAlign: "left",
     width: "75%",
     marginBottom: 30,
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     alignItems: "center",
     marginTop: 25,
-    marginBottom: 75,
+    marginBottom: 55,
   },
   image: {
     width: "100%",
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 22,
+    fontSize: 20,
     margin: 0,
     marginBottom: 35,
     width: "100%",
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   author: {
     fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 22,
+    fontSize: 20,
     margin: 0,
     marginTop: 15,
     color: "black",
@@ -152,19 +152,6 @@ function Article({ article }) {
         </h1>
       </div>
       <div className={classes.article}>
-        {/* <div className={classes.chipArray}>
-          {article.tags.map((tag) => {
-            return (
-              <Chip
-                size="small"
-                color="primary"
-                label={tag}
-                className={classes.chip}
-                key={tag}
-              />
-            );
-          })}
-        </div> */}
         <div className={classes.innerWrapper}>
           <h2 className={classes.author}>{article.author}</h2>
           <h2 className={classes.date}>{article.date}</h2>

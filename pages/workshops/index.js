@@ -17,7 +17,6 @@ export default function Home({ workshops }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginBottom: 45,
         marginTop: 0,
       }}
     >
@@ -36,34 +35,12 @@ export async function getStaticProps() {
   const res = await fetch("https://taskforce-cms.vercel.app/api/workshops");
   const result = await res.json();
 
-  const workshops = result.data;
+  const workshops = result.data.sort((a, b) => a.position - b.position);
 
   return {
     props: {
       workshops,
     },
+    revalidate: 60,
   };
 }
-
-// export async function getServerSideProps() {
-//   await dbConnect();
-
-//   const retrieveData = async (callback) => {
-//     if (callback) {
-//       const result = await callback();
-//       const json_string = JSON.stringify(result);
-//       const data = JSON.parse(json_string);
-//       return data;
-//     } else {
-//       throw new Error("No Callback Was Given");
-//     }
-//   };
-
-//   let workshops = await retrieveData(getWorkshops);
-
-//   return {
-//     props: {
-//       workshops,
-//     },
-//   };
-// }

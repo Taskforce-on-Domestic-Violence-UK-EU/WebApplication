@@ -1,11 +1,9 @@
 import Head from "next/head";
 import Layout from "../../components/UI/Layout";
 import Main from "../../components/Research/Article/Main";
-// import Article from "../../models/article";
-import MobileArticle from "../../components/Research/Article/MobileArticle";
+import MobileMain from "../../components/Research/Article/MobileMain";
 import useWidth from "../../hooks/useWidth";
 import { useEffect } from "react";
-// import dbConnect from "../../utils/dbConnect";
 
 export default function Page({ article }) {
   const { width, setWidth } = useWidth();
@@ -28,7 +26,7 @@ export default function Page({ article }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
-          <MobileArticle />
+          <MobileMain article={article} />
         </Layout>
       </div>
     );
@@ -46,28 +44,6 @@ export default function Page({ article }) {
     );
   }
 }
-
-// TODO : Switch to Static ?
-
-// export async function getServerSideProps({ params }) {
-//   // Call an external API endpoint to get posts.
-//   // You can use any data fetching library
-
-//   await dbConnect();
-
-//   const id = params.id;
-//   const result = await getArticle(id);
-//   const json_string = JSON.stringify(result);
-//   const article = JSON.parse(json_string);
-
-//   // By returning { props: posts }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return {
-//     props: {
-//       article: article,
-//     },
-//   };
-// }
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
@@ -98,19 +74,6 @@ export async function getStaticProps(context) {
     props: {
       article,
     },
+    revalidate: 60,
   };
 }
-
-// export async function getServerSideProps({ params }) {
-//   await dbConnect();
-
-//   var article = await Article.findById(params.id);
-//   article = JSON.stringify(article);
-//   article = JSON.parse(article);
-
-//   return {
-//     props: {
-//       article: article,
-//     },
-//   };
-// }

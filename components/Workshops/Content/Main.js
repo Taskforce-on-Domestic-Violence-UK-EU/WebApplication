@@ -21,16 +21,19 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     // padding: 50,
     width: "75vw",
-    maxWidth: 700,
+    maxWidth: 450,
     marginBottom: 75,
     marginTop: 0,
   },
   textWrapper: {
     display: "flex",
     flexDirection: "column",
-
+    // border: "1px solid black",
     width: "90%",
     height: "100%",
+    padding: 0,
+    margin: 0,
+    marginTop: 20,
   },
   actionWrapper: {
     display: "flex",
@@ -41,9 +44,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     fontFamily: "Playfair Display, serif",
     fontWeight: 500,
-    fontSize: 45,
+    fontSize: 32,
     marginTop: 0,
-    width: "90%",
+    width: "95%",
   },
   text: {
     fontFamily: "Nunito Sans, sans-serif",
@@ -61,10 +64,10 @@ const useStyles = makeStyles((theme) => ({
     color: "grey",
   },
   image: {
-    width: 50,
-    height: 50,
-    objectFit: "fit",
-    borderRadius: 50,
+    width: "100%",
+    height: 325,
+    objectFit: "cover",
+    borderRadius: 2,
   },
   button: {
     borderRadius: 2,
@@ -74,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     textAlign: "center",
     textTransform: "none",
-    width: 140,
+    width: 170,
 
     backgroundColor: "black",
     color: "white",
@@ -120,6 +123,7 @@ const Main = ({ workshop, admin }) => {
 
   return (
     <div className={classes.root}>
+      <img className={classes.image} src={image} />
       <div className={classes.textWrapper}>
         <header className={classes.header}>{title}</header>
         <p className={classes.date}>{date}</p>
@@ -127,10 +131,8 @@ const Main = ({ workshop, admin }) => {
       </div>
       <div className={classes.actionWrapper}>
         <a className={classes.button} href={determineLink(admin)}>
-          Attend
+          Make Reservation
         </a>
-
-        {/* <img className={classes.image} src={image} /> */}
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     width: "75%",
-    paddingTop: 50,
+    paddingTop: 125,
   },
   header: {
     fontFamily: "Nunito Sans, sans-serif",

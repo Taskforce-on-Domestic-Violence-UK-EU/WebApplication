@@ -17,7 +17,6 @@ export default function Home({ data }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 45,
         marginTop: 0,
       }}
     >
@@ -43,8 +42,12 @@ export async function getStaticProps() {
   // let res = await fetch("https://taskforce-cms.vercel.app/api/workshops");
   // let result = await res.json();
 
-  const workshops = await fetchData("workshops");
-  const articles = await fetchData("articles");
+  let workshops = await fetchData("workshops");
+  let articles = await fetchData("articles");
+
+  // Sort
+
+  workshops = workshops.sort((a, b) => a.position - b.position);
 
   return {
     props: {

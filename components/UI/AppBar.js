@@ -13,7 +13,6 @@ import Menu from "./Menu";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: 75,
   },
   appBar: {
     boxShadow: "none",
@@ -30,14 +29,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar({}) {
+export default function ButtonAppBar({ displayFullNav, setDisplayFullNav }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Menu />
+          <Menu
+            displayFullNav={displayFullNav}
+            setDisplayFullNav={setDisplayFullNav}
+          />
         </Toolbar>
       </AppBar>
     </div>

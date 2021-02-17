@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontSize: 17,
     margin: 0,
-    marginTop: 10,
+    marginTop: 18,
   },
   date: {
     fontFamily: "Nunito Sans, sans-serif",
@@ -124,7 +124,7 @@ const Main = ({ person, admin = false }) => {
       <div className={classes.textWrapper}>
         <img className={classes.image} src={image} />
         <header className={classes.header}>{name}</header>
-        <p className={classes.date}>{role}</p>
+        {/* <p className={classes.date}>{role}</p> */}
         <p className={classes.text}>{description}</p>
       </div>
     </div>

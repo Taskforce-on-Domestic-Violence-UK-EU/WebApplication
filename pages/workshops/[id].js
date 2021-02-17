@@ -1,32 +1,63 @@
 import Head from "next/head";
 import Layout from "../../components/UI/Layout";
-// import dbConnect from "../../utils/dbConnect";
-// import { getWorkshop } from "../api/workshops/[id]";
-
 import Workshop from "../../components/Workshops/Workshop/Main";
+import { useEffect } from "react";
+
+// Hooks
+import useWidth from "../../hooks/useWidth";
 
 export default function Home({ workshop, articles }) {
-  return (
-    <div
-      style={{
-        minWidth: "100vw",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginBottom: 45,
-        marginTop: 0,
-      }}
-    >
-      <Head>
-        <title>{workshop.title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <Workshop workshop={workshop} articles={articles} />
-      </Layout>
-    </div>
-  );
+  const { width, setWidth } = useWidth();
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, []);
+
+  if (width < 850) {
+    return (
+      <div
+        style={{
+          minWidth: "100vw",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginBottom: 45,
+          marginTop: 0,
+        }}
+      >
+        <Head>
+          <title>{workshop.title}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Layout>
+          <Workshop workshop={workshop} articles={articles} />
+        </Layout>
+      </div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          minWidth: "100vw",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginBottom: 45,
+          marginTop: 0,
+        }}
+      >
+        <Head>
+          <title>{workshop.title}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Layout>
+          <Workshop workshop={workshop} articles={articles} />
+        </Layout>
+      </div>
+    );
+  }
 }
 
 export async function getStaticPaths() {
@@ -80,41 +111,6 @@ export async function getStaticProps(context) {
       workshop,
       articles,
     },
+    revalidate: 60,
   };
 }
-
-// export async function getServerSideProps({ params }) {
-//   await dbConnect();
-
-//   const retrieveData = async (callback) => {
-//     if (callback) {
-//       const result = await callback(params.id);
-//       const json_string = JSON.stringify(result);
-//       const data = JSON.parse(json_string);
-//       return data;
-//     } else {
-//       throw new Error("No Callback Was Given");
-//     }
-//   };
-
-//   // const retrieveBatchData = async (ids, callback) => {
-//   //   var batch = [];
-
-//   //   await ids.forEach(async (id) => {
-//   //     var req = await retrieveData(callback, id);
-//   //     var data = await req;
-//   //     console.log(data);
-//   //     batch.push(data);
-//   //   });
-
-//   //   return batch;
-//   // };
-
-//   let workshop = await retrieveData(getWorkshop);
-
-//   return {
-//     props: {
-//       workshop,
-//     },
-//   };
-// }

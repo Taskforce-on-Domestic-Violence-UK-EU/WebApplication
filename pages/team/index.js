@@ -18,7 +18,7 @@ export default function Home({}) {
       }}
     >
       <Head>
-        <title>Research</title>
+        <title>Team</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>

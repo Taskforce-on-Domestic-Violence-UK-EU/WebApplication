@@ -8,7 +8,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    minWidth: 400,
+
     display: "flex",
     backgroundColor: "rgb(245, 245, 245)",
     borderRadius: 15,

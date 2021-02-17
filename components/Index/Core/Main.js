@@ -20,35 +20,40 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    justifyContent: "flex-start",
+    justifyContent: "space-evenly",
     alignItems: "center",
+    flexWrap: "wrap",
     // backgroundColor: "#E3A8A8",
-    marginTop: 50,
+    marginTop: 75,
     width: "75vw",
+    marginBottom: 25,
+    maxWidth: 1000,
   },
   textWrapper: {
     display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
 
-    width: "60%",
+    marginTop: 20,
     height: "100%",
   },
   header: {
     fontFamily: "Playfair Display, serif",
     fontWeight: 500,
-    fontSize: 65,
+    fontSize: 35,
     color: "black",
-
-    width: "100%",
   },
   text: {
     fontFamily: "Nunito Sans, sans-serif",
     fontWeight: 400,
-    fontSize: 22,
+    fontSize: 20,
     color: "black",
+    maxWidth: 398,
   },
   image: {
-    width: 375,
+    width: 210,
+    objectFit: "cover",
     borderRadius: 50,
   },
   button: {
@@ -72,12 +77,24 @@ const Main = ({ data }) => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.root}>
-        {/* <img className={classes.image} src={"/sisters.webp"} /> */}
+        <img
+          className={classes.image}
+          src={"https://taskforce.fra1.digitaloceanspaces.com/Logo.svg"}
+        />
         <div className={classes.textWrapper}>
-          <header className={classes.header}>We're Here For You</header>
+          <header className={classes.header}>Our Organization's Aims.</header>
+
           <p className={classes.text}>
-            Covid-19 Task Force on Domestic Violence
+            Research and create awareness of key domestic abuse issues.
+            <br />
+            <br />
+            Advocate for policy change, especially for BAME, migrant, and LGBTQ+
+            survivors. <br />
+            <br />
+            Connect stakeholders working in the domestic abuse field, in order
+            to facilitate knowledge exchange and highlight innovation.
           </p>
+
           {/* <Button variant="contained" className={classes.button}>
             Learn More
           </Button> */}

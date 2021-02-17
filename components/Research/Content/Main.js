@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     // padding: 50,
     width: "75vw",
-    maxWidth: 500,
+    maxWidth: 450,
     marginBottom: 75,
   },
   textWrapper: {
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     padding: 0,
     margin: 0,
+    marginTop: 20,
   },
   actionWrapper: {
     display: "flex",
@@ -44,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     fontFamily: "Playfair Display, serif",
     fontWeight: 500,
-    fontSize: 45,
+    fontSize: 32,
     marginTop: 0,
-    width: "90%",
+    width: "95%",
   },
   text: {
     fontFamily: "Nunito Sans, sans-serif",
@@ -64,10 +65,10 @@ const useStyles = makeStyles((theme) => ({
     color: "grey",
   },
   image: {
-    width: 50,
-    height: 50,
-    objectFit: "fit",
-    borderRadius: 50,
+    width: "100%",
+    height: 325,
+    objectFit: "cover",
+    borderRadius: 2,
   },
   button: {
     borderRadius: 2,
@@ -122,6 +123,11 @@ const Main = ({ article, admin = false }) => {
 
   return (
     <div className={classes.root}>
+      <img
+        className={classes.image}
+        src={image}
+        style={{ backgroundColor: "rgb(215,241,245)" }}
+      />
       <div className={classes.textWrapper}>
         <header className={classes.header}>{title}</header>
         {/* <p className={classes.date}>{date}</p> */}
@@ -136,8 +142,6 @@ const Main = ({ article, admin = false }) => {
         >
           Read
         </a>
-
-        {/* <img className={classes.image} src={image} /> */}
       </div>
     </div>
   );
