@@ -90,10 +90,10 @@ export default function Footer({}) {
           <li className={classes.linkWrapper}>
             <a
               className={classes.link}
-              href={"https://www.instagram.com/covid19dvtaskforceukeu/"}
+              href={"mailto:dvtaskforce.ukeu@gmail.com"}
               target="_blank"
             >
-              hello@taskforceuk.com
+              dvtaskforce.ukeu@gmail.com
             </a>
           </li>
         </ul>

@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import FullNav from "./FullNav";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
+// Hooks
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -22,6 +23,8 @@ const Layout = (props) => {
   const [displayFullNav, setDisplayFullNav] = useState(false);
 
   useEffect(() => {}, [displayFullNav]);
+
+  useEffect(() => {}, []);
 
   return (
     <div className={classes.wrapper}>

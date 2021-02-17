@@ -87,6 +87,21 @@ const Main = ({ workshop, articles = [] }) => {
         opacity: 0.6,
       },
     },
+    disabled: {
+      borderRadius: 2,
+      textDecoration: "none",
+      fontFamily: "Nunito Sans, sans-serif",
+      fontWeight: 700,
+      fontSize: 18,
+      textAlign: "center",
+      textTransform: "none",
+      width: 250,
+      marginTop: 35,
+      backgroundColor: "black",
+      color: "white",
+      padding: 17.5,
+      opacity: 0.6,
+    },
   }));
 
   const classes = useStyles();
@@ -101,7 +116,9 @@ const Main = ({ workshop, articles = [] }) => {
           <a className={classes.button} href={eventLink}>
             Make Reservation
           </a>
-        ) : null}
+        ) : (
+          <div className={classes.disabled}>Already Passed</div>
+        )}
       </div>
       {articles.length > 0 ? <Research articles={articles} /> : null}
     </div>
