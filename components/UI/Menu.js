@@ -120,7 +120,7 @@ const SimpleMenu = ({ displayFullNav, setDisplayFullNav }) => {
         <li style={{ listStyle: "none" }}>
           <Link
             href={
-              "/https://www.google.co.uk/search?sxsrf=ALeKk03F_xqFhl8fpm7wAeL4UOHa4TzuaA%3A1613584629053&source=hp&ei=9VgtYNI2iLBSsZCmcA&iflsig=AINFCbYAAAAAYC1nBf3CAiYm1s-Qs6aka1ZgCTHVGXAq&q=uk+vaccine+covid&oq=uk+vaccine&gs_lcp=Cgdnd3Mtd2l6EAMYADIECCMQJzIICAAQsQMQgwEyCAgAELEDEIMBMgUIABCxAzIICAAQsQMQgwEyBQgAELEDMgUIABCxAzIICAAQsQMQgwEyCAgAELEDEIMBMgUIABCxAzoHCCMQ6gIQJzoLCC4QsQMQxwEQowI6CAguELEDEIMBOgIIAFD3E1ipImCCLmgBcAB4AIABQIgBkASSAQIxMJgBAKABAaoBB2d3cy13aXqwAQo&sclient=gws-wiz"
+              "https://www.google.co.uk/search?sxsrf=ALeKk03F_xqFhl8fpm7wAeL4UOHa4TzuaA%3A1613584629053&source=hp&ei=9VgtYNI2iLBSsZCmcA&iflsig=AINFCbYAAAAAYC1nBf3CAiYm1s-Qs6aka1ZgCTHVGXAq&q=uk+vaccine+covid&oq=uk+vaccine&gs_lcp=Cgdnd3Mtd2l6EAMYADIECCMQJzIICAAQsQMQgwEyCAgAELEDEIMBMgUIABCxAzIICAAQsQMQgwEyBQgAELEDMgUIABCxAzIICAAQsQMQgwEyCAgAELEDEIMBMgUIABCxAzoHCCMQ6gIQJzoLCC4QsQMQxwEQowI6CAguELEDEIMBOgIIAFD3E1ipImCCLmgBcAB4AIABQIgBkASSAQIxMJgBAKABAaoBB2d3cy13aXqwAQo&sclient=gws-wiz"
             }
           >
             <a className={classes.escapeLink}>Escape</a>
